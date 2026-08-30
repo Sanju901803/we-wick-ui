@@ -1,0 +1,57 @@
+<!-- Sub-navigation for citizenship tools -->
+<nav class="border-bottom bg-white shadow-sm">
+  <div class="container">
+    <div class="d-flex gap-1 py-2 overflow-auto">
+      <a routerLink="/citizenship/disclaimer" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/disclaimer')"
+        [class.btn-outline-primary]="!isActive('/citizenship/disclaimer')">
+        <app-icon class="subnav-icon" [iconKey]="'disclaimer'" fallbackEmoji="⚠️" [size]="20"></app-icon>
+        <div class="subnav-label">Disclaimer</div>
+      </a>
+      <a routerLink="/citizenship/topics" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/topics')"
+        [class.btn-outline-primary]="!isActive('/citizenship/topics')">
+        <app-icon class="subnav-icon" [iconKey]="'topics'" fallbackEmoji="🗂️" [size]="20"></app-icon>
+        <div class="subnav-label">Topics <span *ngIf="isLocked('/citizenship/topics')">🔒</span></div>
+      </a>
+      <a routerLink="/citizenship/flashcards" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/flashcards')"
+        [class.btn-outline-primary]="!isActive('/citizenship/flashcards')">
+        <app-icon class="subnav-icon" [iconKey]="'flashcards'" fallbackEmoji="🃏" [size]="20"></app-icon>
+        <div class="subnav-label">Flashcards <span *ngIf="isLocked('/citizenship/flashcards')">🔒</span></div>
+      </a>
+      <a routerLink="/citizenship/quiz" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/quiz')"
+        [class.btn-outline-primary]="!isActive('/citizenship/quiz')">
+        <app-icon class="subnav-icon" [iconKey]="'practiceQuiz'" fallbackEmoji="✏️" [size]="20"></app-icon>
+        <div class="subnav-label">Quiz <span *ngIf="isLocked('/citizenship/quiz')">🔒</span></div>
+      </a>
+      <a routerLink="/citizenship/mock-exam" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/mock-exam')"
+        [class.btn-outline-primary]="!isActive('/citizenship/mock-exam')">
+        <app-icon class="subnav-icon" [iconKey]="'mockExam'" fallbackEmoji="⏱️" [size]="20"></app-icon>
+        <div class="subnav-label">Mock Exam <span *ngIf="isLocked('/citizenship/mock-exam')">🔒</span></div>
+      </a>
+      <a routerLink="/citizenship/bookmarks" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/bookmarks')"
+        [class.btn-outline-primary]="!isActive('/citizenship/bookmarks')">
+        <app-icon class="subnav-icon" [iconKey]="'bookmarksFilled'" fallbackEmoji="⭐" [size]="20"></app-icon>
+        <div class="subnav-label">Bookmarks <span *ngIf="isLocked('/citizenship/bookmarks')">🔒</span></div>
+      </a>
+      <a routerLink="/citizenship/progress" routerLinkActive="active"
+        class="btn btn-sm flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/citizenship/progress')"
+        [class.btn-outline-primary]="!isActive('/citizenship/progress')">
+        <app-icon class="subnav-icon" [iconKey]="'progress'" fallbackEmoji="📊" [size]="20"></app-icon>
+        <div class="subnav-label">Progress <span *ngIf="isLocked('/citizenship/progress')">🔒</span></div>
+      </a>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

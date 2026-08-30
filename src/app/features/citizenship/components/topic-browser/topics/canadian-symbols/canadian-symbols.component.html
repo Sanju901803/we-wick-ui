@@ -1,0 +1,250 @@
+<div style="max-width: 900px">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+    <h4 class="fw-bold mb-0">{{title}}</h4>
+    <a class="link-primary fw-semibold" [href]="officialSectionUrl" target="_blank" rel="noopener noreferrer">Read the official section</a>
+  </div>
+
+  <nav class="mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <button *ngFor="let page of pages" type="button" class="btn btn-sm"
+              [class.btn-primary]="currentPage === page.number"
+              [class.btn-outline-secondary]="currentPage !== page.number"
+              (click)="goToPage(page.number)">{{page.number}}. {{page.label}}</button>
+    </div>
+  </nav>
+
+  <div style="height: 520px; overflow-y: auto; overflow-x: hidden;" class="pe-1">
+
+  <!-- PAGE 1: Canadian Symbols -->
+  <div *ngIf="currentPage === 1">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <p style="line-height:1.8;">Canada has many important symbols — objects, events, and people that have special meaning. Together they help explain what it means to be Canadian and express our national identity.</p>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Canadian Crown</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">The Crown has been a symbol of the state in Canada for <strong>400 years</strong>. Canada has been a constitutional monarchy in its own right since Confederation in <strong>1867</strong> during Queen Victoria's reign. The Crown is a symbol of government, including Parliament, the legislatures, the courts, police services and the Canadian Forces.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/canadian_crown_square.png" alt="The Canadian Crown" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Flags in Canada</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">A new Canadian flag was raised for the first time in <strong>1965</strong>. The <strong>red-white-red pattern</strong> comes from the flag of the Royal Military College, Kingston, founded in 1876. Red and white had been colours of France and England since the Middle Ages and the <strong>national colours of Canada since 1921</strong>. The <strong>Union Jack</strong> is our official Royal Flag. The <strong>Canadian Red Ensign</strong> served as the Canadian flag for about 100 years. The provinces and territories also have flags that embody their distinct traditions.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/canadian_flags_square.png" alt="Flags in Canada" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Maple Leaf</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/maple_leaf_square.png" alt="The Maple Leaf" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">The <strong>maple leaf</strong> is Canada's best-known symbol. Maple leaves were adopted as a symbol by French-Canadians in the 1700s, have appeared on Canadian uniforms and insignia since the 1850s, and are carved into the headstones of our fallen soldiers buried overseas and in Canada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Fleur-de-lys</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">It is said that the lily flower (<strong>"fleur-de-lys"</strong>) was adopted by the French king in the year 496. It became the symbol of French royalty for more than a thousand years, including the colony of New France. Revived at Confederation, the fleur-de-lys was included in the Canadian Red Ensign. In <strong>1948</strong> Quebec adopted its own flag, based on the Cross and the fleur-de-lys.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/fleur_de_lys_square.png" alt="The Fleur-de-lys" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Coat of Arms and Motto</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">As an expression of national pride after the First World War, Canada adopted an official coat of arms and a national motto, <em><strong>A Mari Usque Ad Mare</strong></em>, which in Latin means <strong>"from sea to sea."</strong> The arms contain symbols of England, France, Scotland and Ireland as well as red maple leaves. Today the arms can be seen on dollar bills, government documents and public buildings.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/coat_of_arms_square.png" alt="Coat of Arms of Canada" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Parliament Buildings</h5>
+        <p style="line-height:1.8;">The towers, arches, sculptures and stained glass of the Parliament Buildings embody the French, English and Aboriginal traditions and the Gothic Revival architecture popular in the time of Queen Victoria. The buildings were completed in the <strong>1860s</strong>. The <strong>Centre Block</strong> was destroyed by an accidental fire in <strong>1916</strong> and rebuilt in <strong>1922</strong>. The Library is the only part of the original building remaining. The <strong>Peace Tower</strong> was completed in <strong>1927</strong> in memory of the First World War. The Memorial Chamber within the Tower contains the Books of Remembrance, in which are written the names of soldiers, sailors and airmen who died serving Canada in wars or while on duty.</p>
+        <p style="line-height:1.8;">The provincial legislatures are architectural treasures. The Quebec National Assembly is built in the French Second Empire style, while the legislatures of the other provinces are Baroque, Romanesque and neoclassical, reflecting the Greco-Roman heritage of Western civilization in which democracy originated.</p>
+        <img appImageClick src="assets/images/canadian-symbols/parliament_buildings_banner.png" alt="Parliament Buildings Ottawa" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Popular Sports</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;"><strong>Hockey</strong> is Canada's most popular spectator sport and is considered to be the <strong>national winter sport</strong>. Ice hockey was developed in Canada in the 1800s. The <strong>National Hockey League</strong> plays for the championship <strong>Stanley Cup</strong>, donated by Lord Stanley, the Governor General, in 1892. The <strong>Clarkson Cup</strong>, established in 2005 by Adrienne Clarkson, the 26th Governor General, is awarded for women's hockey.</p>
+            <p class="mb-0" style="line-height:1.8;"><strong>Canadian football</strong> is the second most popular sport. <strong>Curling</strong>, an ice game introduced by Scottish pioneers, is popular. <strong>Lacrosse</strong>, an ancient sport first played by Aboriginals, is the <strong>official summer sport</strong>. Soccer has the most registered players of any game in Canada.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/popular_sports_square.png" alt="Popular sports in Canada" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Beaver</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p class="mb-0" style="line-height:1.8;">The <strong>beaver</strong> was adopted centuries ago as a symbol of the Hudson's Bay Company. It became an emblem of the St. Jean Baptiste Society, a French-Canadian patriotic association, in <strong>1834</strong>, and was also adopted by other groups. This industrious rodent can be seen on the <strong>five-cent coin</strong>, on the coats of arms of <strong>Saskatchewan</strong> and <strong>Alberta</strong>, and of cities such as Montreal and Toronto.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/beaver_square.png" alt="The Beaver" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 2: Canada's Official Languages and Anthems -->
+  <div *ngIf="currentPage === 2">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Canada's Official Languages</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;"><strong>English</strong> and <strong>French</strong> are the two official languages and are important symbols of identity. English speakers (Anglophones) and French speakers (Francophones) have lived together in partnership and creative tension for more than 300 years. <strong>You must have adequate knowledge of English or French to become a Canadian citizen.</strong> Adult applicants 55 years of age and over are exempted from this requirement.</p>
+            <p style="line-height:1.8;">Parliament passed the <em>Official Languages Act</em> in <strong>1969</strong>. It has three main objectives:</p>
+            <ul style="line-height:2;" class="mb-0">
+              <li>Establish equality between French and English in Parliament, the Government of Canada and institutions subject to the Act;</li>
+              <li>Maintain and develop official language minority communities in Canada; and</li>
+              <li>Promote equality of French and English in Canadian society.</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadian-symbols/official_languages_square.png" alt="Canada's Official Languages" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">National Anthem</h5>
+        <p style="line-height:1.8;"><strong>O Canada</strong> was proclaimed as the National Anthem in <strong>1980</strong>. It was first sung in Québec City in <strong>1880</strong>. French and English Canadians sing different words to the National Anthem.</p>
+        <img appImageClick src="assets/images/canadian-symbols/national_anthem_banner.png" alt="O Canada — National Anthem" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Royal Anthem</h5>
+        <p style="line-height:1.8;">The Royal Anthem of Canada, <strong>"God Save the King (or Queen),"</strong> can be played or sung on any occasion when Canadians wish to honour the Sovereign.</p>
+        <img appImageClick src="assets/images/canadian-symbols/royal_anthem_banner.png" alt="God Save the King — Royal Anthem" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 3: The Victoria Cross, The Order of Canada -->
+  <div *ngIf="currentPage === 3">
+
+    <!-- Section 1: The Victoria Cross -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Victoria Cross</h5>
+        <p style="line-height:1.8;">The <strong>Victoria Cross (V.C.)</strong> is the highest honour available to Canadians and is awarded for the most conspicuous bravery, a daring or pre-eminent act of valour or self-sacrifice, or extreme devotion to duty in the presence of the enemy. The V.C. has been awarded to <strong>96 Canadians</strong> since 1854, including:</p>
+        <img appImageClick src="assets/images/canadian-symbols/victoria_cross_banner.png" alt="The Victoria Cross" class="img-fluid rounded shadow-sm w-100 mb-3" style="object-fit:contain;">
+        <ul style="line-height:2;" class="mb-0">
+          <li><strong>Then Lieutenant Alexander Roberts Dunn</strong>, born in present-day Toronto, served in the British Army in the Charge of the Light Brigade at Balaclava (1854) in the Crimean War, and was the <strong>first Canadian to be awarded the Victoria Cross</strong>.</li>
+          <li><strong>Able Seaman William Hall</strong> of Horton, Nova Scotia, whose parents were American slaves, was the <strong>first Black man to be awarded the V.C.</strong> for his role in the Siege of Lucknow during the Indian Rebellion of 1857.</li>
+          <li><strong>Corporal Filip Konowal</strong>, born in Ukraine, showed exceptional courage in the Battle of Hill 70 in 1917, and became the <strong>first member of the Canadian Corps not born in the British Empire</strong> to be awarded the V.C.</li>
+          <li><strong>Flying ace Captain Billy Bishop</strong>, born in Owen Sound, Ontario, earned the V.C. in the Royal Flying Corps during the First World War, and was later an honorary Air Marshal of the Royal Canadian Air Force.</li>
+          <li><strong>Captain Paul Triquet</strong> of Cabano, Quebec, earned the V.C. leading his men and a handful of tanks in the attack on Casa Berardi in Italy in 1943 during the Second World War, and was later a Brigadier.</li>
+          <li><strong>Lieutenant Robert Hampton Gray</strong>, a navy pilot born in Trail, B.C., was killed while bombing and sinking a Japanese warship in August 1945, a few days before the end of the Second World War, and was the <strong>last Canadian to receive the V.C.</strong> to date.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section 2: The Order of Canada and Other Honours -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Order of Canada and Other Honours</h5>
+        <p style="line-height:1.8;">All countries have ways to recognize outstanding citizens. Official awards are called <strong>honours</strong>, consisting of <em>orders, decorations</em>, and <em>medals</em>. After using British honours for many years, Canada started its own honours system with the <strong>Order of Canada</strong> in <strong>1967</strong>, the centennial of Confederation.</p>
+        <img appImageClick src="assets/images/canadian-symbols/order_of_canada_banner.png" alt="The Order of Canada" class="img-fluid rounded shadow-sm w-100 mb-3" style="object-fit:contain;">
+        <div class="alert alert-secondary py-3 px-3">
+          <p class="mb-0" style="line-height:1.8;">If you know of fellow citizens who you think are worthy of recognition, you are welcome to nominate them. Information on nominations for many of these honours can be found at <a href="http://www.gg.ca/document.aspx?id=5" target="_blank" rel="noopener noreferrer">www.gg.ca</a>.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 4: National Public Holidays and Other Important Dates -->
+  <div *ngIf="currentPage === 4">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">National Public Holidays and Other Important Dates</h5>
+        <div class="row g-0">
+          <div class="col-6">
+            <ul class="list-unstyled mb-0" style="line-height:2;">
+              <li class="d-flex justify-content-between gap-2"><span><strong>New Year's Day</strong></span><span class="text-muted">Jan 1</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Sir John A. Macdonald Day</strong></span><span class="text-muted">Jan 11</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Good Friday</strong></span><span class="text-muted">Before Easter</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Easter Monday</strong></span><span class="text-muted">After Easter</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Vimy Day</strong></span><span class="text-muted">Apr 9</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Victoria Day</strong></span><span class="text-muted">Mon before May 25</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Fête Nationale (QC)</strong></span><span class="text-muted">Jun 24</span></li>
+            </ul>
+          </div>
+          <div class="col-6 ps-4">
+            <ul class="list-unstyled mb-0" style="line-height:2;">
+              <li class="d-flex justify-content-between gap-2"><span><strong>Canada Day</strong></span><span class="text-muted">Jul 1</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Labour Day</strong></span><span class="text-muted">1st Mon of Sep</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Thanksgiving Day</strong></span><span class="text-muted">2nd Mon of Oct</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Remembrance Day</strong></span><span class="text-muted">Nov 11</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Sir Wilfrid Laurier Day</strong></span><span class="text-muted">Nov 20</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Christmas Day</strong></span><span class="text-muted">Dec 25</span></li>
+              <li class="d-flex justify-content-between gap-2"><span><strong>Boxing Day</strong></span><span class="text-muted">Dec 26</span></li>
+            </ul>
+          </div>
+        </div>
+        <img appImageClick src="assets/images/canadian-symbols/public_holidays_banner.png" alt="National Public Holidays" class="img-fluid rounded shadow-sm w-100 mt-3" style="object-fit:contain;">
+      </div>
+    </section>
+  </div>
+
+  </div><!-- end scrollable content -->
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">← Previous</button>
+    <span class="text-muted small">Page {{currentPage}} of {{pages.length}}</span>
+    <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === pages.length" (click)="goToPage(currentPage + 1)">Next →</button>
+  </div>
+
+</div>

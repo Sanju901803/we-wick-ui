@@ -1,0 +1,87 @@
+<div class="container py-4">
+  <div class="d-flex align-items-center mb-4 gap-2">
+    <a routerLink="/citizenship/topics" class="btn btn-sm btn-outline-primary">← Back</a>
+    <h2 class="mb-0 fw-bold d-flex align-items-center gap-2">
+      <app-icon [iconKey]="'progress'" fallbackEmoji="📊" [size]="22"></app-icon>
+      My Progress
+    </h2>
+  </div>
+
+  <div *ngIf="hasData; else noData">
+    <!-- Overall Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+          <div class="display-6 fw-bold text-danger">{{totalAttempted}}</div>
+          <small class="text-muted">Questions Attempted</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+          <div class="display-6 fw-bold text-success">{{totalCorrect}}</div>
+          <small class="text-muted">Correct</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+          <div class="display-6 fw-bold text-warning">{{overallPct}}%</div>
+          <small class="text-muted">Overall Score</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm text-center p-3">
+          <div class="display-6 fw-bold text-info">{{bookmarkCount}}</div>
+          <small class="text-muted">Bookmarks</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overall bar -->
+    <div class="card border-0 shadow-sm p-3 mb-4">
+      <div class="d-flex justify-content-between mb-1">
+        <span class="fw-semibold">Overall Progress</span>
+        <span>{{overallPct}}%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar bg-success" [style.width]="overallPct + '%'"></div>
+      </div>
+    </div>
+
+    <!-- Per-topic breakdown -->
+    <h5 class="fw-bold mb-3">By Topic</h5>
+    <div class="card border-0 shadow-sm p-3 mb-4">
+      <div *ngFor="let stat of topicStats" class="mb-3">
+        <div class="d-flex justify-content-between mb-1">
+          <span>{{stat.topic}}</span>
+          <span class="text-muted small">{{stat.correct}} / {{stat.total}} correct</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar"
+            [class.bg-success]="stat.pct >= 75"
+            [class.bg-warning]="stat.pct >= 50 && stat.pct < 75"
+            [class.bg-danger]="stat.pct < 50"
+            [style.width]="stat.pct + '%'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-outline-danger" (click)="resetProgress()">Reset All Progress</button>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="text-center py-5">
+      <div class="mb-3">
+        <app-icon [iconKey]="'progress'" fallbackEmoji="📊" [size]="48"></app-icon>
+      </div>
+      <h5 class="text-muted">No progress yet</h5>
+      <p class="text-muted">Complete a quiz or use flashcards to track your progress here.</p>
+      <div class="d-flex gap-2 justify-content-center">
+        <a routerLink="/citizenship/quiz" class="btn btn-primary">Start a Quiz</a>
+        <a routerLink="/citizenship/flashcards" class="btn btn-outline-primary">Use Flashcards</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

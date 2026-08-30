@@ -1,0 +1,87 @@
+<div class="container py-4">
+  <div class="d-flex align-items-center mb-4 gap-2">
+    <a routerLink="/citizenship/topics" class="btn btn-sm btn-outline-primary">← Back</a>
+    <h2 class="mb-0 fw-bold d-flex align-items-center gap-2">
+      <app-icon [iconKey]="'flashcards'" fallbackEmoji="🃏" [size]="22"></app-icon>
+      Flashcards
+    </h2>
+  </div>
+
+  <!-- Controls -->
+  <div class="row g-2 mb-4 align-items-center">
+    <div class="col-auto">
+      <select class="form-select form-select-sm" [(ngModel)]="selectedTopic" (change)="onTopicChange()">
+        <option value="">All Topics</option>
+        <option *ngFor="let t of allTopics" [value]="t">{{t}}</option>
+      </select>
+    </div>
+    <div class="col-auto text-muted small">
+      Card {{currentIndex + 1}} of {{cards.length}}
+    </div>
+  </div>
+
+  <!-- Flashcard -->
+  <div *ngIf="cards.length; else noCards" class="mb-4">
+    <div class="flashcard-wrapper mb-3">
+      <div class="flashcard" [class.flipped]="flipped" (click)="flip()">
+        <!-- Front: Question -->
+        <div class="flashcard-front text-center">
+          <div>
+            <small class="badge bg-primary mb-3">{{currentCard.topic}}</small>
+            <h5 class="fw-bold">{{currentCard.question}}</h5>
+            <img *ngIf="currentCard.imagePath" [src]="'assets/images/' + currentCard.imagePath"
+              appImageClick
+              class="img-fluid rounded mt-2" alt="Question image" style="max-height:150px">
+            <p class="text-muted small mt-3">Click to reveal answer</p>
+          </div>
+        </div>
+        <!-- Back: Answer + Explanation -->
+        <div class="flashcard-back text-center">
+          <div>
+            <p class="fw-bold text-success mb-2 d-flex align-items-center justify-content-center gap-1">
+              <app-icon [iconKey]="'success'" fallbackEmoji="✓" [size]="14"></app-icon>
+              {{currentCard.options[currentCard.answerIndex]}}
+            </p>
+            <p class="text-muted small">{{currentCard.explanation}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <button class="btn btn-outline-primary" (click)="prev()" [disabled]="currentIndex === 0">
+        ← Prev
+      </button>
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary btn-sm" (click)="markResult(false)">Still learning</button>
+        <button class="btn btn-success btn-sm d-inline-flex align-items-center gap-1" (click)="markResult(true)">
+          Know it
+          <app-icon [iconKey]="'success'" fallbackEmoji="✓" [size]="12"></app-icon>
+        </button>
+        <button class="bookmark-btn" [class.bookmarked]="isBookmarked()" (click)="toggleBookmark()">
+          <app-icon
+            [iconKey]="isBookmarked() ? 'bookmarksFilled' : 'bookmarksOutline'"
+            [fallbackEmoji]="isBookmarked() ? '⭐' : '☆'"
+            [size]="18"
+          ></app-icon>
+        </button>
+      </div>
+      <button class="btn btn-outline-primary" (click)="next()" [disabled]="currentIndex === cards.length - 1">
+        Next →
+      </button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="mt-3">
+      <div class="progress">
+        <div class="progress-bar bg-success" [style.width.%]="progressPct"></div>
+      </div>
+      <small class="text-muted">{{knownCount}} / {{cards.length}} known</small>
+    </div>
+  </div>
+
+  <ng-template #noCards>
+    <div class="text-center py-5 text-muted">No flashcards available for this selection.</div>
+  </ng-template>
+</div>

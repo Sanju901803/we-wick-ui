@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="d-flex align-items-center gap-2">
+      <a routerLink="/citizenship/topics" class="btn btn-sm btn-outline-primary">← Back</a>
+      <h2 class="mb-0 fw-bold d-flex align-items-center gap-2">
+        <app-icon [iconKey]="'bookmarksFilled'" fallbackEmoji="⭐" [size]="22"></app-icon>
+        Bookmarks
+      </h2>
+    </div>
+    <button class="btn btn-sm btn-outline-danger" *ngIf="bookmarkedQuestions.length"
+      (click)="clearAll()">Clear All</button>
+  </div>
+
+  <div *ngIf="bookmarkedQuestions.length; else empty">
+    <p class="text-muted mb-3">{{bookmarkedQuestions.length}} bookmarked question(s)</p>
+    <div class="d-flex gap-2 mb-4">
+      <a routerLink="/citizenship/flashcards" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+        <app-icon [iconKey]="'flashcards'" fallbackEmoji="🃏" [size]="14"></app-icon>
+        Study as Flashcards
+      </a>
+      <a routerLink="/citizenship/quiz" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+        <app-icon [iconKey]="'practiceQuiz'" fallbackEmoji="✏️" [size]="14"></app-icon>
+        Practice Quiz
+      </a>
+    </div>
+
+    <div *ngFor="let q of bookmarkedQuestions" class="card border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between">
+          <div>
+            <span class="badge bg-primary mb-2">{{q.topic}}</span>
+            <p class="fw-semibold mb-2">{{q.question}}</p>
+          </div>
+          <button class="bookmark-btn bookmarked ms-2 flex-shrink-0"
+            (click)="removeBookmark(q.id)" title="Remove bookmark">
+            <app-icon [iconKey]="'bookmarksFilled'" fallbackEmoji="⭐" [size]="18"></app-icon>
+          </button>
+        </div>
+        <img *ngIf="q.imagePath" [src]="'assets/images/' + q.imagePath"
+          appImageClick
+          class="img-fluid rounded mb-2" style="max-height:180px" alt="Question image">
+        <ul class="list-unstyled mb-2">
+          <li *ngFor="let opt of q.options; let oi = index"
+            class="p-2 rounded mb-1"
+            [class.bg-success]="oi === q.answerIndex"
+            [class.text-white]="oi === q.answerIndex"
+            [class.bg-light]="oi !== q.answerIndex">
+            {{oi === q.answerIndex ? '✓' : '○'}} {{opt}}
+          </li>
+        </ul>
+        <small class="text-muted fst-italic">💡 {{q.explanation}}</small>
+        <small class="text-muted fst-italic d-inline-flex align-items-center gap-1">
+          <app-icon [iconKey]="'ideaTip'" fallbackEmoji="💡" [size]="14"></app-icon>
+          {{q.explanation}}
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <div class="text-center py-5">
+      <div class="mb-3">
+        <app-icon [iconKey]="'bookmarksOutline'" fallbackEmoji="☆" [size]="48"></app-icon>
+      </div>
+      <h5 class="text-muted">No bookmarks yet</h5>
+      <p class="text-muted">Click the ☆ icon on any question to bookmark it for later study.</p>
+      <a routerLink="/citizenship/topics" class="btn btn-primary">Browse Topics →</a>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,277 @@
+<div style="max-width: 900px">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+    <h4 class="fw-bold mb-0">{{title}}</h4>
+    <a class="link-primary fw-semibold" [href]="officialSectionUrl" target="_blank" rel="noopener noreferrer">
+      Read the official section
+    </a>
+  </div>
+
+  <!-- Page navigation -->
+  <nav class="mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <button *ngFor="let page of pages"
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="currentPage === page.number"
+              [class.btn-outline-secondary]="currentPage !== page.number"
+              (click)="goToPage(page.number)">
+        {{page.number}}. {{page.label}}
+      </button>
+    </div>
+  </nav>
+
+  <!-- Scrollable page content -->
+  <div style="height: 520px; overflow-y: auto; overflow-x: hidden;" class="pe-1">
+
+  <!-- PAGE 1: Rights of Citizenship -->
+  <div *ngIf="currentPage === 1">
+
+    <!-- Panel 1: Rights and Responsibilities intro — text left, image right -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body p-0">
+        <div class="px-4 py-3">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-5">
+              <h5 class="fw-bold mb-2">Canadian citizens have rights and responsibilities.</h5>
+              <p class="mb-0" style="line-height:1.8;">These come to us from our history, are secured by Canadian law, and reflect our shared traditions, identity, and values.</p>
+            </div>
+            <div class="col-md-7 text-center">
+              <img src="assets/images/rights-and-responsibilities/rights-and-responsibilities.png"
+                   alt="Canadian citizens with rights and responsibilities shields"
+                   appImageClick
+                   class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: Sources of Canadian law — image left, text right -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body p-0">
+        <div class="px-4 py-3">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-7 text-center order-md-1 order-2">
+              <img src="assets/images/rights-and-responsibilities/canadian-law-sources.png"
+                   alt="Sources of Canadian law: Parliament, Common Law, Civil Code, Constitution"
+                   appImageClick
+                   class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+            </div>
+            <div class="col-md-5 order-md-2 order-1">
+              <h5 class="fw-bold mb-2">Canadian law has several sources,</h5>
+              <p class="mb-0" style="line-height:1.8;">including laws passed by Parliament and the provincial legislatures, English common law, the civil code of France and the unwritten constitution that we have inherited from Great Britain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: Magna Carta — text left, image right -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body p-0">
+        <div class="px-4 py-3">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-5">
+              <h5 class="fw-bold mb-2">Great Charter of Freedoms</h5>
+              <p class="mb-0" style="line-height:1.8;">Together, these secure for Canadians an 800-year old tradition of ordered liberty, which dates back to the signing of <strong>Magna Carta</strong> in 1215 in England (also known as the Great Charter of Freedoms).</p>
+            </div>
+            <div class="col-md-7 text-center">
+              <p class="fw-semibold mb-2">These Freedoms include</p>
+              <img src="assets/images/rights-and-responsibilities/great-charter-of-freedoms.png"
+                   alt="Magna Carta scroll with the four freedoms"
+                   appImageClick
+                   class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 4: Habeas corpus — image left, text right -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body p-0">
+        <div class="px-4 py-3">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-7 text-center">
+              <img src="assets/images/rights-and-responsibilities/habeas-corpus.png"
+                   alt="Habeas corpus document with Common Law book and scales of justice"
+                   appImageClick
+                   class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+            </div>
+            <div class="col-md-5">
+              <h5 class="fw-bold mb-2">Habeas corpus</h5>
+              <p class="mb-0" style="line-height:1.8;"><strong>Habeas corpus</strong>, the right to challenge unlawful detention by the state, comes from English common law.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 5: Canadian Charter of Rights and Freedoms + Fundamental Freedoms accordion -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-md-5">
+            <h5 class="fw-bold mb-2">Canadian Charter of Rights and Freedoms</h5>
+            <p class="mb-0" style="line-height:1.8;">The Constitution of Canada was amended in 1982 to entrench the Canadian Charter of Rights and Freedoms, which begins with the words, "Whereas Canada is founded upon principles that recognize the supremacy of God and the rule of law." This phrase underlines the importance of religious traditions to Canadian society and the dignity and worth of the human person.</p>
+          </div>
+          <div class="col-md-7 text-center">
+            <img src="assets/images/rights-and-responsibilities/canadian-charter-of-rights-and-freedoms.png"
+                 alt="Canadian Charter of Rights and Freedoms"
+                 appImageClick
+                 class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+          </div>
+        </div>
+
+        <hr class="my-3">
+
+        <h5 class="fw-bold mb-2">Fundamental Freedoms</h5>
+        <p class="mb-4" style="line-height:1.8;">The Charter attempts to summarize fundamental freedoms while also setting out additional rights. The most important of these are <em><strong>Mobility Rights</strong></em>, <em><strong>Aboriginal Peoples' Rights</strong></em>, <em><strong>Official Language Rights</strong></em>, and <em><strong>Multiculturalism</strong></em>.</p>
+
+        <!-- Expand All / Collapse All -->
+        <div class="d-flex gap-2 mb-3">
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="expandAll()">⊞ Expand All</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="collapseAll()">⊟ Collapse All</button>
+        </div>
+
+        <!-- Accordion items -->
+        <div class="d-flex flex-column gap-2">
+          <div *ngFor="let right of charteredRights" class="border rounded overflow-hidden">
+            <button type="button"
+                    class="btn w-100 text-start px-3 py-2 d-flex align-items-center gap-2"
+                    [class.btn-light]="!isExpanded(right.id)"
+                    [class.btn-primary]="isExpanded(right.id)"
+                    (click)="toggleRight(right.id)">
+              <span style="font-size:1.1rem;line-height:1;">{{ isExpanded(right.id) ? '▾' : '▸' }}</span>
+              <span class="fw-bold fst-italic">{{ right.label }}</span>
+            </button>
+            <div *ngIf="isExpanded(right.id)" class="px-3 py-3 border-top">
+              <div class="row g-4 align-items-center">
+                <div class="col-md-5">
+                  <p class="mb-0" style="line-height:1.8;">{{ right.description }}</p>
+                </div>
+                <div class="col-md-7 text-center">
+                  <img [src]="right.image" [alt]="right.imageAlt"
+                       appImageClick
+                       class="img-fluid rounded shadow-sm" style="max-height:260px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 2: Responsibilities of Citizenship -->
+  <div *ngIf="currentPage === 2">
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-md-5">
+            <h5 class="fw-bold mb-2">Citizenship Responsibilities</h5>
+            <p class="mb-0" style="line-height:1.8;">In Canada, rights come with responsibilities. Every citizen is expected to contribute to the well-being of their community and country.</p>
+          </div>
+          <div class="col-md-7 text-center">
+            <img src="assets/images/rights-and-responsibilities/citizenship-responsibilities.png"
+                 alt="Citizenship Responsibilities"
+                 appImageClick
+                 class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+          </div>
+        </div>
+
+        <hr class="my-3">
+
+        <!-- Expand All / Collapse All -->
+        <div class="d-flex gap-2 mb-3">
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="expandAllResponsibilities()">⊞ Expand All</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="collapseAllResponsibilities()">⊟ Collapse All</button>
+        </div>
+
+        <!-- Accordion items -->
+        <div class="d-flex flex-column gap-2">
+          <div *ngFor="let resp of citizenshipResponsibilities" class="border rounded overflow-hidden">
+            <button type="button"
+                    class="btn w-100 text-start px-3 py-2 d-flex align-items-center gap-2"
+                    [class.btn-light]="!isResponsibilityExpanded(resp.id)"
+                    [class.btn-primary]="isResponsibilityExpanded(resp.id)"
+                    (click)="toggleResponsibility(resp.id)">
+              <span style="font-size:1.1rem;line-height:1;">{{ isResponsibilityExpanded(resp.id) ? '▾' : '▸' }}</span>
+              <span class="fw-bold fst-italic">{{ resp.label }}</span>
+            </button>
+            <div *ngIf="isResponsibilityExpanded(resp.id)" class="px-3 py-3 border-top">
+              <div class="row g-4 align-items-center">
+                <div class="col-md-5">
+                  <p class="mb-0" style="line-height:1.8;">{{ resp.description }}</p>
+                </div>
+                <div class="col-md-7 text-center">
+                  <img [src]="resp.image" [alt]="resp.imageAlt"
+                       appImageClick
+                       class="img-fluid rounded shadow-sm" style="max-height:260px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 3: The Equality of Women and Men -->
+  <div *ngIf="currentPage === 3">
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">The Equality of Women and Men</h5>
+        <p style="line-height:1.8;">In Canada, men and women are equal under the law. Canada's openness and generosity do not extend to barbaric cultural practices that tolerate spousal abuse, "honour killings," female genital mutilation, forced marriage or other gender-based violence. Those guilty of these crimes are severely punished under Canada's criminal laws.</p>
+        <div class="text-center mt-3">
+          <img src="assets/images/rights-and-responsibilities/equality-of-women-and-men.png"
+               alt="The Equality of Women and Men in Canada"
+               appImageClick
+               class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 4: Defending Canada -->
+  <div *ngIf="currentPage === 4">
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Defending Canada</h5>
+        <p style="line-height:1.8;">There is no compulsory military service in Canada. However, serving in the regular Canadian Forces (navy, army and air force) is a noble way to contribute to Canada and an excellent career choice. You can serve in your local part-time navy, militia and air reserves and gain valuable experience, skills and contacts. Young people can learn discipline, responsibility, and skills by getting involved in the cadets.</p>
+        <p style="line-height:1.8;">You may also serve in the Coast Guard or emergency services in your community such as a police force or fire department. By helping to protect your community, you follow in the footsteps of Canadians before you who made sacrifices in the service of our country.</p>
+        <div class="text-center mt-3">
+          <img src="assets/images/rights-and-responsibilities/defending-canada.png"
+               alt="Defending Canada — Canadian Forces"
+               appImageClick
+               class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  </div><!-- end scrollable content -->
+
+  <!-- Page navigation footer -->
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button type="button" class="btn btn-outline-secondary btn-sm"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)">
+      ← Previous
+    </button>
+    <span class="text-muted small">Page {{currentPage}} of {{pages.length}}</span>
+    <button type="button" class="btn btn-outline-secondary btn-sm"
+            [disabled]="currentPage === pages.length"
+            (click)="goToPage(currentPage + 1)">
+      Next →
+    </button>
+  </div>
+
+</div>

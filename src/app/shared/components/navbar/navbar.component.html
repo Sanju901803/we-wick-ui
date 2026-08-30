@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: var(--ww-primary);">
+  <div class="container">
+    <a class="navbar-brand d-inline-flex align-items-center" routerLink="/">
+      <img
+        src="assets/images/wewick-logo.png"
+        alt="We-Wick Tools logo"
+        class="navbar-brand-logo"
+      />
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+            <app-icon [iconKey]="'home'" fallbackEmoji="🏠" [size]="16" class="me-1"></app-icon>
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/citizenship" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: false}">
+            <app-icon [iconKey]="'citizenshipExam'" fallbackEmoji="🇨🇦" [size]="16" class="me-1"></app-icon>
+            Citizenship Exam
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contractor" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: false}">
+            <app-icon [iconKey]="'contractorVsFullTimer'" fallbackEmoji="💼" [size]="16" class="me-1"></app-icon>
+            Contractor vs Full-Timer
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dividend-calculator" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: false}">
+            <app-icon [iconKey]="'dividendCalculator'" fallbackEmoji="📈" [size]="16" class="me-1"></app-icon>
+            Dividend Calculator
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

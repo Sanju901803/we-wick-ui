@@ -1,0 +1,324 @@
+<div style="max-width: 900px">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+    <h4 class="fw-bold mb-0">{{title}}</h4>
+    <a class="link-primary fw-semibold" [href]="officialSectionUrl" target="_blank" rel="noopener noreferrer">Read the official section</a>
+  </div>
+
+  <nav class="mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <button *ngFor="let page of pages" type="button" class="btn btn-sm"
+              [class.btn-primary]="currentPage === page.number"
+              [class.btn-outline-secondary]="currentPage !== page.number"
+              (click)="goToPage(page.number)">{{page.number}}. {{page.label}}</button>
+    </div>
+  </nav>
+
+  <div style="height: 520px; overflow-y: auto; overflow-x: hidden;" class="pe-1">
+
+  <!-- PAGE 1: The Regions of Canada, Provinces and Territories -->
+  <div *ngIf="currentPage === 1">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <p style="line-height:1.8;">Canada is the <strong>second largest country on earth</strong> — 10 million square kilometres. Three oceans line Canada's frontiers: the <strong>Pacific Ocean</strong> in the west, the <strong>Atlantic Ocean</strong> in the east, and the <strong>Arctic Ocean</strong> to the north. Along the southern edge of Canada lies the Canada-United States boundary. Both Canada and the U.S.A. are committed to a safe, secure and efficient frontier.</p>
+
+        <h5 class="fw-bold mb-2 mt-3">The Regions of Canada</h5>
+        <p style="line-height:1.8;">Canada includes many different geographical areas and five distinct regions:</p>
+        <ul style="line-height:2;">
+          <li>The Atlantic Provinces</li>
+          <li>Central Canada</li>
+          <li>The Prairie Provinces</li>
+          <li>The West Coast</li>
+          <li>The Northern Territories</li>
+        </ul>
+
+        <img appImageClick src="assets/images/canadas-regions/canada_regions_banner.png" alt="The Regions of Canada" class="img-fluid rounded shadow-sm w-100 mt-3 mb-3" style="object-fit:contain;">
+
+        <div class="alert alert-secondary py-3 px-3">
+          <h6 class="fw-bold mb-2">Provinces and Territories</h6>
+          <p class="mb-0" style="line-height:1.8;">Canada has <strong>ten provinces</strong> and <strong>three territories</strong>. Each province and territory has its own capital city. You should know the capital of your province or territory as well as that of Canada.</p>
+        </div>
+        <img appImageClick src="assets/images/canadas-regions/provinces_territories_banner.png" alt="Provinces and Territories of Canada" class="img-fluid rounded shadow-sm w-100 mt-3" style="object-fit:contain;">
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 2: The National Capital, Population -->
+  <div *ngIf="currentPage === 2">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The National Capital</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;"><strong>Ottawa</strong>, located on the Ottawa River, was chosen as the capital in <strong>1857 by Queen Victoria</strong>, the great-great-grandmother of Queen Elizabeth II. Today it is Canada's <strong>fourth largest metropolitan area</strong>. The National Capital Region, 4,700 square kilometres surrounding Ottawa, preserves and enhances the area's built heritage and natural environment.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/national_capital_square.png" alt="Ottawa — Canada's National Capital" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+        <div class="alert alert-secondary py-3 px-3 mt-3">
+          <h6 class="fw-bold mb-2">Population</h6>
+          <p class="mb-0" style="line-height:1.8;">Canada has a population of about <strong>34 million people</strong>. While the majority live in cities, Canadians also live in small towns, rural areas and everywhere in between.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 3: The Atlantic Provinces -->
+  <div *ngIf="currentPage === 3">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Atlantic Provinces</h5>
+        <p style="line-height:1.8;">Atlantic Canada's coasts and natural resources, including fishing, farming, forestry and mining, have made these provinces an important part of Canada's history and development. The Atlantic Ocean brings cool winters and cool humid summers.</p>
+        <img appImageClick src="assets/images/canadas-regions/atlantic_provinces_banner.png" alt="The Atlantic Provinces" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Newfoundland and Labrador</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Newfoundland and Labrador is the <strong>most easterly point in North America</strong> and has its own time zone. In addition to its natural beauty, the province has a unique heritage linked to the sea. The oldest colony of the British Empire and a strategic prize in Canada's early history, the province has long been known for its fisheries, coastal fishing villages and distinct culture. Today off-shore oil and gas extraction contributes a substantial part of the economy. Labrador also has immense hydro-electric resources.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/newfoundland_labrador_square.png" alt="Newfoundland and Labrador" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Prince Edward Island</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;"><strong>Prince Edward Island (P.E.I.)</strong> is the <strong>smallest province</strong>, known for its beaches, red soil and agriculture, especially potatoes. P.E.I. is the <strong>birthplace of Confederation</strong>, connected to mainland Canada by one of the longest continuous multispan bridges in the world, the <strong>Confederation Bridge</strong>. <em>Anne of Green Gables</em>, set in P.E.I. by Lucy Maud Montgomery, is a much-loved story about the adventures of a little red-headed orphan girl.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/prince_edward_island_square.png" alt="Prince Edward Island" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Nova Scotia</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/nova_scotia_square.png" alt="Nova Scotia" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Nova Scotia is the <strong>most populous Atlantic Province</strong>, with a rich history as the gateway to Canada. Known for the world's highest tides in the <strong>Bay of Fundy</strong>, the province's identity is linked to shipbuilding, fisheries and shipping. As Canada's <strong>largest east coast port</strong>, deep-water and ice-free, the capital, <strong>Halifax</strong>, has played an important role in Atlantic trade and defence and is home to <strong>Canada's largest naval base</strong>. Nova Scotia has a long history of coal mining, forestry and agriculture. Today there is also off-shore oil and gas exploration. The province's Celtic and Gaelic traditions sustain a vibrant culture. Nova Scotia is home to over <strong>700 annual festivals</strong>, including the spectacular military tattoo in Halifax.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">New Brunswick</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Situated in the Appalachian Range, the province was founded by the <strong>United Empire Loyalists</strong> and has the second largest river system on North America's Atlantic coastline, the <strong>St. John River system</strong>. Forestry, agriculture, fisheries, mining, food processing and tourism are the principal industries. <strong>Saint John</strong> is the largest city, port and manufacturing centre; <strong>Moncton</strong> is the principal Francophone Acadian centre; and <strong>Fredericton</strong>, the historic capital. New Brunswick is the <strong>only officially bilingual province</strong>, and about one-third of the population lives and works in French. The province's pioneer Loyalist and French cultural heritage and history come alive in street festivals and traditional music.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/new_brunswick_square.png" alt="New Brunswick" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 4: Central Canada -->
+  <div *ngIf="currentPage === 4">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Central Canada</h5>
+        <p style="line-height:1.8;">More than half the people in Canada live in cities and towns near the <strong>Great Lakes</strong> and the <strong>St. Lawrence River</strong> in southern Quebec and Ontario, known as Central Canada and the industrial and manufacturing heartland. Southern Ontario and Quebec have cold winters and warm humid summers. Together, Ontario and Quebec produce more than <strong>three-quarters of all Canadian manufactured goods</strong>.</p>
+        <img appImageClick src="assets/images/canadas-regions/central_canada_banner.png" alt="Central Canada" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Quebec</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Nearly eight million people live in Quebec, the vast majority along or near the St. Lawrence River. More than three-quarters speak French as their first language. The resources of the Canadian Shield have helped Quebec to develop important industries, including forestry, energy and mining. Quebec is Canada's <strong>main producer of pulp and paper</strong>. The province's huge supply of fresh water has made it <strong>Canada's largest producer of hydro-electricity</strong>. Quebecers are leaders in cutting-edge industries such as pharmaceuticals and aeronautics. Quebec films, music, literary works and food have international stature, especially in <em>La Francophonie</em>, an association of French-speaking nations. <strong>Montreal</strong>, Canada's second largest city and the second largest mainly French-speaking city in the world after Paris, is famous for its cultural diversity.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/quebec_square.png" alt="Quebec" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Ontario</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">At more than 12 million, the people of Ontario make up <strong>more than one-third of Canadians</strong>. The large and culturally diverse population, natural resources and strategic location contribute to a vital economy. <strong>Toronto</strong> is the largest city in Canada and the country's main financial centre. Many people work in the service or manufacturing industries, which produce a large percentage of Canada's exports. The Niagara region is known for its vineyards, wines and fruit crops. Ontario farmers raise dairy and beef cattle, poultry, and vegetable and grain crops. Founded by United Empire Loyalists, Ontario also has the <strong>largest French-speaking population outside of Quebec</strong>, with a proud history of preserving their language and culture. There are <strong>five Great Lakes</strong> located between Ontario and the United States: Lake Ontario, Lake Erie, Lake Huron, Lake Michigan (in the U.S.A.) and <strong>Lake Superior</strong>, the largest freshwater lake in the world.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/ontario_square.png" alt="Ontario" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 5: The Prairie Provinces -->
+  <div *ngIf="currentPage === 5">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Prairie Provinces</h5>
+        <p style="line-height:1.8;">Manitoba, Saskatchewan and Alberta are the Prairie Provinces, rich in energy resources and some of the most fertile farmland in the world. The region is mostly dry, with cold winters and hot summers.</p>
+        <img appImageClick src="assets/images/canadas-regions/prairie_provinces_banner.png" alt="The Prairie Provinces" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Manitoba</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Manitoba's economy is based on agriculture, mining and hydro-electric power generation. The province's most populous city is <strong>Winnipeg</strong>, whose Exchange District includes the most famous street intersection in Canada, <strong>Portage and Main</strong>. Winnipeg's French Quarter, <strong>St. Boniface</strong>, has Western Canada's largest Francophone community at 45,000. Manitoba is also an important centre of Ukrainian culture, with 14% reporting Ukrainian origins, and the <strong>largest Aboriginal population of any province</strong>, at over 15%.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/manitoba_square.png" alt="Manitoba" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Saskatchewan</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Saskatchewan, once known as the <strong>"breadbasket of the world"</strong> and the <strong>"wheat province,"</strong> has <strong>40% of the arable land in Canada</strong> and is the country's largest producer of grains and oilseeds. It also boasts the world's richest deposits of uranium and potash, used in fertilizer, and produces oil and natural gas. <strong>Regina</strong>, the capital, is home to the training academy of the <strong>Royal Canadian Mounted Police</strong>. <strong>Saskatoon</strong>, the largest city, is the headquarters of the mining industry and an important educational, research and technology centre.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/saskatchewan_square.png" alt="Saskatchewan" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Alberta</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/alberta_square.png" alt="Alberta" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Alberta is the <strong>most populous Prairie province</strong>. The province, and the world-famous <strong>Lake Louise</strong> in the Rocky Mountains, were both named after Princess Louise Caroline Alberta, fourth daughter of Queen Victoria. Alberta has <strong>five national parks</strong>, including <strong>Banff National Park</strong>, established in 1885. The rugged Badlands house some of the world's richest deposits of prehistoric fossils and dinosaur finds. Alberta is the <strong>largest producer of oil and gas</strong>, and the oil sands in the north are being developed as a major energy source. Alberta is also renowned for agriculture, especially for the vast cattle ranches that make Canada one of the world's major beef producers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 6: West Coast -->
+  <div *ngIf="currentPage === 6">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The West Coast</h5>
+        <p style="line-height:1.8;">British Columbia is known for its majestic mountains and as Canada's Pacific gateway. The <strong>Port of Vancouver</strong>, Canada's largest and busiest, handles billions of dollars in goods traded around the world. Warm airstreams from the Pacific Ocean give the B.C. coast a temperate climate.</p>
+        <img appImageClick src="assets/images/canadas-regions/west_coast_banner.png" alt="The West Coast" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">British Columbia</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">British Columbia (B.C.), on the Pacific coast, is Canada's westernmost province, with a population of four million. The <strong>Port of Vancouver</strong> is our gateway to the Asia-Pacific. About one-half of all the goods produced in B.C. are forestry products, including lumber, newsprint, and pulp and paper products — the <strong>most valuable forestry industry in Canada</strong>. B.C. is also known for mining, fishing, and the fruit orchards and wine industry of the <strong>Okanagan Valley</strong>. B.C. has the <strong>most extensive park system in Canada</strong>, with approximately 600 provincial parks. The province's large Asian communities have made Chinese and Punjabi the most spoken languages in the cities after English. The capital, <strong>Victoria</strong>, is a tourist centre and headquarters of the navy's Pacific fleet.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/british_columbia_square.png" alt="British Columbia" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE 7: The Northern Territories -->
+  <div *ngIf="currentPage === 7">
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">The Northern Territories</h5>
+        <p style="line-height:1.8;">The Northwest Territories, Nunavut and Yukon contain <strong>one-third of Canada's land mass</strong> but have a population of only 100,000. There are gold, lead, copper, diamond and zinc mines. Oil and gas deposits are being developed. The North is often referred to as the <strong>"Land of the Midnight Sun"</strong> because at the height of summer, daylight can last up to 24 hours. In winter, the sun disappears and darkness sets in for three months. The Northern territories have long cold winters and short cool summers. Much of the North is made up of <strong>tundra</strong>, the vast rocky Arctic plain. Because of the cold Arctic climate, there are no trees on the tundra and the soil is permanently frozen. Some continue to earn a living by hunting, fishing and trapping. Inuit art is sold throughout Canada and around the world.</p>
+        <img appImageClick src="assets/images/canadas-regions/northern_territories_banner.png" alt="The Northern Territories" class="img-fluid rounded shadow-sm w-100 mt-2" style="object-fit:contain;">
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Yukon</h5>
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">Thousands of miners came to the Yukon during the <strong>Gold Rush of the 1890s</strong>, as celebrated in the poetry of Robert W. Service. Mining remains a significant part of the economy. The <strong>White Pass and Yukon Railway</strong>, opened from Skagway in neighbouring Alaska to the territorial capital, <strong>Whitehorse</strong> in 1900, provides a spectacular tourist excursion across precipitous passes and bridges. Yukon holds the record for the <strong>coldest temperature ever recorded in Canada (−63°C)</strong>.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/yukon_square.png" alt="Yukon" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+        <div class="alert alert-secondary py-2 px-3 mb-0">
+          <p class="mb-0" style="line-height:1.8;"><strong>Mount Logan</strong>, located in the Yukon, is the <strong>highest mountain in Canada</strong>. It is named in honour of Sir William Logan, a world-famous geologist, born in Montreal in 1798 to Scottish immigrant parents. Logan founded and directed the Geological Survey of Canada from 1842 to 1869 and is considered one of Canada's greatest scientists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Northwest Territories</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <p style="line-height:1.8;">The Northwest Territories (N.W.T.) were originally made up in 1870 from Rupert's Land and the North-Western Territory. The capital, <strong>Yellowknife</strong> (population 20,000), is called the <strong>"diamond capital of North America."</strong> More than half the population is Aboriginal (Dene, Inuit and Métis). The <strong>Mackenzie River</strong>, at 4,200 kilometres, is the <strong>second-longest river system in North America</strong> after the Mississippi and drains an area of 1.8 million square kilometres.</p>
+          </div>
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/northwest_territories_square.png" alt="Northwest Territories" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-3">Nunavut</h5>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <img appImageClick src="assets/images/canadas-regions/nunavut_square.png" alt="Nunavut" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+          </div>
+          <div class="col-md-8">
+            <p style="line-height:1.8;"><strong>Nunavut</strong>, meaning <strong>"our land"</strong> in Inuktitut, was established in <strong>1999</strong> from the eastern part of the Northwest Territories, including all of the former District of Keewatin. The capital is <strong>Iqaluit</strong>, formerly Frobisher Bay, named after the English explorer Martin Frobisher, who penetrated the uncharted Arctic for Queen Elizabeth I in 1576. The 19-member Legislative Assembly chooses a premier and ministers by consensus. The population is about <strong>85% Inuit</strong>, and Inuktitut is an official language and the first language in schools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="alert alert-secondary py-3 px-3">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-8">
+          <h6 class="fw-bold mb-2">The Canadian Rangers</h6>
+          <p class="mb-0" style="line-height:1.8;">Canada's vast north brings security and sovereignty challenges. Dealing with harsh weather conditions in an isolated region, the <strong>Canadian Rangers</strong>, part of the Canadian Forces Reserves (militia), play a key role. Drawing on indigenous knowledge and experience, the Rangers travel by snowmobile in the winter and all-terrain vehicles in the summer from Resolute to the <strong>Magnetic North Pole</strong>, and keep the flag flying in Canada's Arctic.</p>
+        </div>
+        <div class="col-md-4">
+          <img appImageClick src="assets/images/canadas-regions/canadian_rangers_square.png" alt="The Canadian Rangers" style="width:100%;aspect-ratio:1/1;object-fit:cover;" class="rounded shadow-sm">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">← Previous</button>
+    <span class="text-muted small">Page {{currentPage}} of {{pages.length}}</span>
+    <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === pages.length" (click)="goToPage(currentPage + 1)">Next →</button>
+  </div>
+
+</div>

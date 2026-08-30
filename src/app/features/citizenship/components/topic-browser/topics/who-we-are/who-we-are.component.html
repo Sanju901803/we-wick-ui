@@ -1,0 +1,283 @@
+<div style="max-width: 900px">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+    <h4 class="fw-bold mb-0">{{title}}</h4>
+    <a class="link-primary fw-semibold" [href]="officialSectionUrl" target="_blank" rel="noopener noreferrer">
+      Read the official section
+    </a>
+  </div>
+
+  <!-- Page navigation -->
+  <nav class="mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <button *ngFor="let page of pages"
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="currentPage === page.number"
+              [class.btn-outline-secondary]="currentPage !== page.number"
+              (click)="goToPage(page.number)">
+        {{page.number}}. {{page.label}}
+      </button>
+    </div>
+  </nav>
+
+  <!-- Scrollable page content -->
+  <div style="height: 520px; overflow-y: auto; overflow-x: hidden;" class="pe-1">
+
+  <!-- PAGE 1: Introduction -->
+  <div *ngIf="currentPage === 1">
+
+    <!-- Panel 1: A Strong and Free Country — banner style -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">A Strong and Free Country</h5>
+        <p style="line-height:1.8;">Canada is known around the world as a strong and free country. Canadians are proud of their unique identity. We have inherited the oldest continuous constitutional tradition in the world. We are the only constitutional monarchy in North America. Our institutions uphold a commitment to <strong>Peace, Order, and Good Government</strong> — a key phrase in Canada's original constitutional document in 1867, the British North America Act.</p>
+        <p style="line-height:1.8;">A belief in ordered liberty, enterprise, hard work and fair play have enabled Canadians to build a prosperous society in a rugged environment from our Atlantic shores to the Pacific Ocean and to the Arctic Circle — so much so that poets and songwriters have hailed Canada as the <mark><em>"Great Dominion."</em></mark></p>
+        <div class="text-center mt-3">
+          <img src="assets/images/who-we-are/who-we-are-intro.png"
+               alt="Canada — a strong and free country"
+               appImageClick
+               class="img-fluid rounded shadow-sm" style="width:100%;object-fit:contain;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: Three Founding Peoples -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body p-0">
+        <div class="px-4 py-3">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-5">
+              <h5 class="fw-bold mb-2">Three Founding Peoples</h5>
+              <p class="mb-0" style="line-height:1.8;">To understand what it means to be Canadian, it is important to know about our three founding peoples — <strong>Aboriginal</strong>, <strong>French</strong> and <strong>British</strong>.</p>
+            </div>
+            <div class="col-md-7 text-center">
+              <img src="assets/images/who-we-are/three-founding-peoples.png"
+                   alt="Canada's three founding peoples — Aboriginal, French and British"
+                   appImageClick
+                   class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 2: Aboriginal Peoples -->
+  <div *ngIf="currentPage === 2">
+
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">Aboriginal Peoples</h5>
+        <p style="line-height:1.8;">The ancestors of Aboriginal peoples are believed to have migrated from Asia many thousands of years ago. They were well established here long before explorers from Europe first came to North America. Aboriginal and treaty rights are in the Canadian Constitution. Territorial rights were first guaranteed through the <strong>Royal Proclamation of 1763</strong> by King George III.</p>
+        <div class="text-center mb-4">
+          <img src="assets/images/who-we-are/aboriginal-peoples.png"
+               alt="Aboriginal peoples of Canada"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+
+        <!-- Residential schools note -->
+        <div class="alert alert-secondary py-2 px-3 mb-4" style="line-height:1.8;">
+          From the 1800s until the 1980s, the federal government placed many Aboriginal children in residential schools to educate and assimilate them into mainstream Canadian culture. The schools were poorly funded and inflicted hardship on the students; some were physically abused. In <strong>2008</strong>, Ottawa formally apologized to the former students. Today, Aboriginal peoples enjoy renewed pride and confidence, and have made significant achievements in agriculture, the environment, business and the arts.
+        </div>
+
+        <hr class="my-3">
+
+        <h5 class="fw-bold mb-2">Three Distinct Groups</h5>
+        <p class="mb-4" style="line-height:1.8;">Today, the term Aboriginal peoples refers to three distinct groups: <em><strong>First Nations</strong></em>, <em><strong>Inuit</strong></em>, and <em><strong>Métis</strong></em>. About 65% of the Aboriginal people are First Nations, while 30% are Métis and 4% Inuit.</p>
+
+        <!-- Expand All / Collapse All -->
+        <div class="d-flex gap-2 mb-3">
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="expandAll()">⊞ Expand All</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="collapseAll()">⊟ Collapse All</button>
+        </div>
+
+        <!-- Accordion items -->
+        <div class="d-flex flex-column gap-2">
+          <div *ngFor="let group of aboriginalGroups" class="border rounded overflow-hidden">
+            <button type="button"
+                    class="btn w-100 text-start px-3 py-2 d-flex align-items-center gap-2"
+                    [class.btn-light]="!isExpanded(group.id)"
+                    [class.btn-primary]="isExpanded(group.id)"
+                    (click)="toggleGroup(group.id)">
+              <span style="font-size:1.1rem;line-height:1;">{{ isExpanded(group.id) ? '▾' : '▸' }}</span>
+              <span class="fw-bold fst-italic">{{ group.label }}</span>
+            </button>
+            <div *ngIf="isExpanded(group.id)" class="px-3 py-3 border-top">
+              <div class="row g-4 align-items-center">
+                <div class="col-md-5">
+                  <p class="mb-0" style="line-height:1.8;">{{ group.description }}</p>
+                </div>
+                <div class="col-md-7 text-center">
+                  <img [src]="group.image" [alt]="group.imageAlt"
+                       appImageClick
+                       class="img-fluid rounded shadow-sm" style="max-height:260px;object-fit:contain;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 3: English and French -->
+  <div *ngIf="currentPage === 3">
+
+    <!-- Panel 1: English and French -->
+    <!-- Panel 1: English and French — banner -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">English and French</h5>
+        <p style="line-height:1.8;">English and French define the reality of day-to-day life for most people and are the country's official languages. Today, there are <strong>18 million Anglophones</strong> — people who speak English as a first language — and <strong>7 million Francophones</strong> — people who speak French as their first language. While the majority of Francophones live in Quebec, one million live in Ontario, New Brunswick and Manitoba. New Brunswick is the only officially bilingual province.</p>
+        <div class="text-center mb-1">
+          <img src="assets/images/who-we-are/english-and-french.png"
+               alt="English and French — Canada's official languages"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: The Acadians — square -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-7 text-center order-md-1 order-2">
+            <img src="assets/images/who-we-are/acadians.png"
+                 alt="The Acadians — descendants of French colonists"
+                 appImageClick
+                 class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+          </div>
+          <div class="col-md-5 order-md-2 order-1">
+            <h5 class="fw-bold mb-2">The Acadians</h5>
+            <p class="mb-0" style="line-height:1.8;">The Acadians are the descendants of French colonists who began settling in what are now the Maritime provinces in 1604. Between 1755 and 1763, during the war between Britain and France, more than two-thirds of the Acadians were deported from their homeland — an ordeal known as the <strong>"Great Upheaval."</strong> Despite this, the Acadians survived and maintained their unique identity. Today, Acadian culture is flourishing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: Quebecers — square -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-5">
+            <h5 class="fw-bold mb-2">Quebecers</h5>
+            <p class="mb-0" style="line-height:1.8;">Quebecers are the people of Quebec, the vast majority French-speaking. Most are descendants of 8,500 French settlers from the 1600s and 1700s and maintain a unique identity, culture and language. The House of Commons recognized in 2006 that <strong>the Québécois form a nation within a united Canada.</strong> One million Anglo-Quebecers have a heritage of 250 years and form a vibrant part of the Quebec fabric.</p>
+          </div>
+          <div class="col-md-7 text-center">
+            <img src="assets/images/who-we-are/quebecers.png"
+                 alt="Quebecers — a nation within a united Canada"
+                 appImageClick
+                 class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 4: English Canadians — banner -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">English Canadians</h5>
+        <p style="line-height:1.8;">The basic way of life in English-speaking areas was established by hundreds of thousands of English, Welsh, Scottish and Irish settlers, soldiers and migrants from the 1600s to the 20th century. Generations of pioneers and builders of British origins, as well as other groups, invested and endured hardship in laying the foundations of our country. This helps explain why Anglophones (English speakers) are generally referred to as <strong>English Canadians</strong>.</p>
+        <div class="text-center mb-1">
+          <img src="assets/images/who-we-are/english-canadians.png"
+               alt="English Canadians — British settlers and pioneers"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 5: Becoming Canadian — square -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-7 text-center order-md-1 order-2">
+            <img src="assets/images/who-we-are/becoming-canadian.png"
+                 alt="Becoming Canadian — embracing democratic principles"
+                 appImageClick
+                 class="img-fluid rounded shadow-sm" style="max-height:280px;object-fit:contain;">
+          </div>
+          <div class="col-md-5 order-md-2 order-1">
+            <h5 class="fw-bold mb-2">Becoming Canadian</h5>
+            <p class="mb-0" style="line-height:1.8;">Some Canadians immigrate from places where they have experienced warfare or conflict. Such experiences do not justify bringing to Canada violent, extreme or hateful prejudices. In becoming Canadian, newcomers are expected to embrace <strong>democratic principles</strong> such as the rule of law.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PAGE 4: Diversity in Canada -->
+  <div *ngIf="currentPage === 4">
+
+    <!-- Panel 1: A Land of Immigrants -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">A Land of Immigrants</h5>
+        <p style="line-height:1.8;">The majority of Canadians were born in this country, and this has been true since the 1800s. However, Canada is often referred to as a land of immigrants because, over the past 200 years, millions of newcomers have helped to build and defend our way of life. The largest groups are the English, French, Scottish, Irish, German, Italian, Chinese, Aboriginal, Ukrainian, Dutch, South Asian and Scandinavian. Since the 1970s, most immigrants have come from Asian countries.</p>
+        <div class="text-center mb-3">
+          <img src="assets/images/who-we-are/a_land_of_immigrants_banner.png"
+               alt="Canada — a land of immigrants"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+        <!-- Non-official languages alert -->
+        <div class="alert alert-secondary py-2 px-3 mb-0" style="line-height:1.8;">
+          <strong>Non-official languages</strong> are commonly spoken in Canadian homes. <strong>Chinese languages are the second most-spoken at home</strong>, after English, in two of Canada's biggest cities. In Vancouver, <strong>13%</strong> of the population speak Chinese languages at home; in Toronto, the number is <strong>7%</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: A Multicultural Society -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">A Multicultural Society</h5>
+        <p style="line-height:1.8;">The great majority of Canadians identify as Christians. Many ethnic and religious groups — including Muslims, Jews, Hindus, Sikhs and others — live and work in peace as proud Canadians. Canada's diversity also includes gay and lesbian Canadians, who enjoy the full protection of and equal treatment under the law, including access to civil marriage. Together, these diverse groups make up today's multicultural society.</p>
+        <div class="text-center mb-1">
+          <img src="assets/images/who-we-are/a_multicultural_society_banner.png"
+               alt="Canada's multicultural society"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: Unity in Diversity -->
+    <section class="card border-0 shadow-sm mb-3 overflow-hidden">
+      <div class="card-body px-4 py-3">
+        <h5 class="fw-bold mb-2">Unity in Diversity</h5>
+        <p style="line-height:1.8;">John Buchan, the 1st Baron Tweedsmuir and a popular Governor General of Canada (1935–40), said immigrant groups "should retain their individuality and each make its contribution to the national character." Each could learn "from the other, and … while they cherish their own special loyalties and traditions, they cherish not less that new loyalty and tradition which springs from their union."</p>
+        <div class="text-center mb-1">
+          <img src="assets/images/who-we-are/unity_in_diversity_banner.png"
+               alt="Unity in diversity — John Buchan, Governor General of Canada"
+               appImageClick
+               class="img-fluid rounded shadow-sm w-100" style="max-height:320px;object-fit:cover;">
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  </div><!-- end scrollable content -->
+
+  <!-- Page navigation footer -->
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button type="button" class="btn btn-outline-secondary btn-sm"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)">
+      ← Previous
+    </button>
+    <span class="text-muted small">Page {{currentPage}} of {{pages.length}}</span>
+    <button type="button" class="btn btn-outline-secondary btn-sm"
+            [disabled]="currentPage === pages.length"
+            (click)="goToPage(currentPage + 1)">
+      Next →
+    </button>
+  </div>
+
+</div>
+
