@@ -1,0 +1,22 @@
+<!-- Main-tab navigation for the Contractor vs Full-Timer tool: Contractor | Fulltime -->
+<nav class="border-bottom bg-white shadow-sm">
+  <div class="container">
+    <div class="d-flex gap-2 py-2">
+      <a routerLink="/contractor/contractor" routerLinkActive="active"
+        class="btn flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/contractor/contractor')"
+        [class.btn-outline-primary]="!isActive('/contractor/contractor')">
+        <div style="font-size: 22px;">🏢</div>
+        <div class="subnav-label fw-bold">Contractor</div>
+      </a>
+      <a routerLink="/contractor/fulltime" routerLinkActive="active"
+        class="btn flex-fill text-center subnav-btn"
+        [class.btn-primary]="isActive('/contractor/fulltime')"
+        [class.btn-outline-primary]="!isActive('/contractor/fulltime')">
+        <div style="font-size: 22px;">👔</div>
+        <div class="subnav-label fw-bold">Fulltime</div>
+      </a>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

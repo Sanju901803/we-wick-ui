@@ -1,4 +1,4 @@
-<div style="max-width: 900px">
+<div style="max-width: 900px" class="mx-auto">
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
     <h4 class="fw-bold mb-0">{{title}}</h4>
     <a class="link-primary fw-semibold" [href]="officialSectionUrl" target="_blank" rel="noopener noreferrer">Read the official section</a>
@@ -13,7 +13,7 @@
     </div>
   </nav>
 
-  <div style="height: 520px; overflow-y: auto; overflow-x: hidden;" class="pe-1">
+  <div class="topic-scroll-panel pe-1">
 
   <!-- PAGE 1: Canadian Symbols -->
   <div *ngIf="currentPage === 1">
@@ -211,7 +211,7 @@
       <div class="card-body px-4 py-3">
         <h5 class="fw-bold mb-3">National Public Holidays and Other Important Dates</h5>
         <div class="row g-0">
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <ul class="list-unstyled mb-0" style="line-height:2;">
               <li class="d-flex justify-content-between gap-2"><span><strong>New Year's Day</strong></span><span class="text-muted">Jan 1</span></li>
               <li class="d-flex justify-content-between gap-2"><span><strong>Sir John A. Macdonald Day</strong></span><span class="text-muted">Jan 11</span></li>
@@ -222,7 +222,7 @@
               <li class="d-flex justify-content-between gap-2"><span><strong>Fête Nationale (QC)</strong></span><span class="text-muted">Jun 24</span></li>
             </ul>
           </div>
-          <div class="col-6 ps-4">
+          <div class="col-12 col-md-6 ps-md-4">
             <ul class="list-unstyled mb-0" style="line-height:2;">
               <li class="d-flex justify-content-between gap-2"><span><strong>Canada Day</strong></span><span class="text-muted">Jul 1</span></li>
               <li class="d-flex justify-content-between gap-2"><span><strong>Labour Day</strong></span><span class="text-muted">1st Mon of Sep</span></li>

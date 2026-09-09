@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
@@ -30,6 +30,8 @@ const TOPIC_ROUTES: Record<string, string> = {
 export class TopicBrowserComponent implements OnInit {
   topics: TopicSummary[] = [];
 
+  @ViewChild('topicNavList') topicNavList?: ElementRef<HTMLDivElement>;
+
   constructor(private questionService: QuestionService) {}
 
   ngOnInit(): void {
@@ -44,5 +46,14 @@ export class TopicBrowserComponent implements OnInit {
 
   asIconKey(key: string): IconKey {
     return key as IconKey;
+  }
+
+  /** Scrolls the mobile horizontal topic strip left/right by roughly one item's width. */
+  scrollTopics(direction: -1 | 1): void {
+    const el = this.topicNavList?.nativeElement;
+    if (!el) {
+      return;
+    }
+    el.scrollBy({ left: direction * 160, behavior: 'smooth' });
   }
 }

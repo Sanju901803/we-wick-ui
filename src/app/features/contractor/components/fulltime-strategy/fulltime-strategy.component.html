@@ -1,0 +1,112 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">📈</div>
+      <h1 class="display-6 fw-bold mb-2">Fulltime — Investment & Tax Reduction Strategy</h1>
+      <p class="lead text-muted">
+        The best strategy to reduce tax and grow your savings for your current scenario — built
+        from the gross salary you entered on the "Fulltime to Contractor" tab.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 h-100 text-center">
+        <div class="card-body p-4">
+          <div class="text-muted small text-uppercase fw-bold mb-1">💵 Current Take-Home Pay</div>
+          <div class="display-6 fw-bold text-success">{{ state.result.employeeNet | currency:'CAD':'symbol':'1.0-0' }}</div>
+          <div class="small text-muted">After income tax, CPP and EI, on {{ state.inputs.fullTimeGrossSalary | currency:'CAD':'symbol':'1.0-0' }} gross.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 h-100 text-center">
+        <div class="card-body p-4">
+          <div class="text-muted small text-uppercase fw-bold mb-1">🏦 Est. RRSP Room (18%)</div>
+          <div class="display-6 fw-bold text-primary">{{ rrspContributionRoom | currency:'CAD':'symbol':'1.0-0' }}</div>
+          <div class="small text-muted">18% of gross salary, capped at {{ rrspDollarLimit | currency:'CAD':'symbol':'1.0-0' }}/year.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 h-100 text-center">
+        <div class="card-body p-4">
+          <div class="text-muted small text-uppercase fw-bold mb-1">💸 Est. Tax Savings if Maxed</div>
+          <div class="display-6 fw-bold text-success">{{ estimatedRrspTaxSavings | currency:'CAD':'symbol':'1.0-0' }}</div>
+          <div class="small text-muted">RRSP room × your marginal rate ({{ marginalTaxRate | percent:'1.1-1' }}).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-1">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">🎯 Best Strategy for Your Current Scenario</h5>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Take-home pay today</span>
+            <span class="fw-bold">{{ state.result.employeeNet | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">+ Tax refund from maxing RRSP room</span>
+            <span class="fw-bold text-success">+{{ estimatedRrspTaxSavings | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="d-flex justify-content-between pt-2 border-top">
+            <span class="fw-bold">= Effective take-home if RRSP maxed &amp; refund banked</span>
+            <span class="fw-bold fs-5 text-success">{{ netAfterRrspSavings | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="form-text mt-2">
+            At {{ state.inputs.fullTimeGrossSalary | currency:'CAD':'symbol':'1.0-0' }} gross, your marginal rate is
+            {{ marginalTaxRate | percent:'1.1-1' }} — every RRSP dollar contributed saves that much in tax today, while
+            the investment grows tax-deferred until withdrawal (typically in retirement, at a lower rate).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-1">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">📈 Ideal Investment Order of Operations</h5>
+          <ol class="mb-0">
+            <li class="mb-2">
+              <strong>Capture any employer RRSP/pension match first.</strong> An employer match is an instant,
+              guaranteed 100% return — always contribute at least enough to get the full match before anything else.
+            </li>
+            <li class="mb-2">
+              <strong>Max out your RRSP room next, especially in high-income years.</strong> Your estimated room this
+              year is {{ rrspContributionRoom | currency:'CAD':'symbol':'1.0-0' }}, which would generate roughly
+              {{ estimatedRrspTaxSavings | currency:'CAD':'symbol':'1.0-0' }} back at tax time at your
+              {{ marginalTaxRate | percent:'1.1-1' }} marginal rate.
+            </li>
+            <li class="mb-2">
+              <strong>Then fill your TFSA.</strong> Annual TFSA room is {{ tfsaAnnualLimit | currency:'CAD':'symbol':'1.0-0' }} —
+              growth and withdrawals are entirely tax-free, making it ideal for shorter-term goals or once RRSP room
+              is used up.
+            </li>
+            <li class="mb-0">
+              <strong>Time large RRSP contributions to your highest-income years.</strong> The tax deduction is worth
+              more in years you're in a higher bracket — if income varies year to year, prioritize maxing RRSP in
+              your highest-earning years and consider FHSA/non-registered investing in lower-income years.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ General educational guidance only, based on 2026 Ontario + Federal tax rules — not financial, tax, or
+        legal advice. Actual RRSP room depends on prior-year earned income and any pension adjustments. Consult a
+        professional accountant or financial planner before making decisions.
+      </div>
+    </div>
+  </div>
+</div>
+

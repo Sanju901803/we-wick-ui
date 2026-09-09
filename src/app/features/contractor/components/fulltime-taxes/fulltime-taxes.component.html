@@ -1,0 +1,123 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">🧾</div>
+      <h1 class="display-6 fw-bold mb-2">Fulltime Personal Taxes & Expenses</h1>
+      <p class="lead text-muted">
+        The taxes that apply to a full-time (T4) employee, and the deductions/credits that can
+        reduce your personal taxable income.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <!-- TAXES THAT APPLY -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">💰 Taxes That Apply</h5>
+          <div class="table-responsive">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <td>CPP Max Contribution (base + CPP2)</td>
+                  <td class="text-end">{{ cppMax | currency:'CAD':'symbol':'1.0-2' }}</td>
+                </tr>
+                <tr>
+                  <td>EI Max Premium</td>
+                  <td class="text-end">{{ eiMax | currency:'CAD':'symbol':'1.0-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h6 class="fw-bold mt-4 mb-2">Your Current Scenario</h6>
+          <div class="table-responsive">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <td class="text-muted">Annual Gross Salary</td>
+                  <td class="text-end">{{ state.inputs.fullTimeGrossSalary | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">Income Tax (Federal + Ontario)</td>
+                  <td class="text-end">{{ state.result.employeeTax | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">CPP Contribution</td>
+                  <td class="text-end">{{ state.result.employeeCpp | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">EI Premium</td>
+                  <td class="text-end">{{ state.result.employeeEi | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="fw-bold">
+                  <td>Final Take-Home Pay</td>
+                  <td class="text-end">{{ state.result.employeeNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-text mt-2">Edit your gross salary on the "Fulltime to Contractor" tab.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEDUCTIONS -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">📋 Common Deductions & Credits</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0" *ngFor="let category of deductionCategories">
+              <div class="fw-semibold">{{ category.name }}</div>
+              <div class="small text-muted">{{ category.description }}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-1">
+    <div class="col-lg-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">📊 2026 Personal Tax Brackets (Federal + Ontario)</h5>
+          <div class="table-responsive">
+            <table class="table table-sm table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Income From</th>
+                  <th>Income To</th>
+                  <th>Regular Income Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bracket of brackets">
+                  <td>{{ bracket.from | currency:'CAD':'symbol':'1.0-0' }}</td>
+                  <td>{{ isInfinite(bracket.to) ? '∞' : (bracket.to | currency:'CAD':'symbol':'1.0-0') }}</td>
+                  <td>{{ bracket.regularRate | percent:'1.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-text mt-2">
+            Tax is calculated progressively — only the portion of income within each bracket is
+            taxed at that bracket's rate.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-12">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ Reference rates for the 2026 tax year (Ontario + Federal). Deduction/credit eligibility
+        depends on individual circumstances — consult a professional accountant.
+      </div>
+    </div>
+  </div>
+</div>
+

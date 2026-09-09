@@ -20,6 +20,13 @@ $dark:      #2a5a50;  // Deep teal (navbar)
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--ww-bg);
+  overflow-x: hidden;
+}
+
+// Prevent any stray wide element (table, pre, long word) from forcing
+// horizontal page scroll on narrow phone screens.
+html {
+  overflow-x: hidden;
 }
 
 .navbar-brand-logo {
@@ -28,6 +35,25 @@ body {
   max-width: min(52vw, 320px);
   display: block;
 }
+
+@media (max-width: 575.98px) {
+  .navbar-brand-logo {
+    height: 48px;
+  }
+}
+
+// Large decorative emoji/icon used at the top of tool "hero" sections.
+// Shrinks on small phones so it doesn't dominate the viewport.
+.tool-hero-icon {
+  font-size: 3.5rem;
+}
+
+@media (max-width: 575.98px) {
+  .tool-hero-icon {
+    font-size: 2.25rem;
+  }
+}
+
 
 // Invert SVG icons to white when inside an active sidebar item
 .ww-sidebar-active app-icon img {
@@ -152,3 +178,121 @@ body {
 .ww-sidebar-active {
   background-color: var(--ww-primary) !important;
 }
+
+
+// Topic browser: left nav becomes a horizontal scrollable strip on phones/
+// tablets, and a fixed-width vertical sidebar (wrapping text, no scroll)
+// from the md breakpoint up.
+.topic-sidebar {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.topic-nav-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; // Firefox — arrows are the scroll affordance instead
+  scroll-behavior: smooth;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+  }
+}
+
+.topic-nav-item span {
+  white-space: nowrap;
+}
+
+// Round arrow buttons that hint at (and trigger) horizontal scrolling of the
+// mobile/tablet topic strip.
+.topic-nav-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 2rem;
+  border: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+  color: var(--ww-primary);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.topic-nav-arrow-left {
+    left: 0;
+  }
+
+  &.topic-nav-arrow-right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+  }
+}
+
+// Sidebar for a topic's internal "pages" sub-navigation (e.g. Federal
+// Elections' "How Elections Work / Voting / ..." pages), and reused for the
+// Contractor/Fulltime tool's child-page navigation — same responsive
+// behaviour as .topic-sidebar.
+@media (min-width: 768px) {
+  .topic-sidebar {
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+
+  // On desktop the sidebar is a fixed-width vertical list — let long topic
+  // names wrap onto a second line instead of forcing a horizontal (or
+  // vertical) scrollbar at the bottom of the nav.
+  .topic-nav-list {
+    overflow: visible;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .topic-nav-item span {
+    white-space: normal;
+    line-height: 1.2;
+  }
+}
+
+// Flashcards: allow a bit more room and internal scrolling for long text on
+// small screens instead of overflowing the card's edges.
+@media (max-width: 575.98px) {
+  .flashcard,
+  .flashcard-front,
+  .flashcard-back {
+    min-height: 200px;
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    padding: 1.25rem;
+    overflow-y: auto;
+  }
+}
+
+// Generic safety net: any table not explicitly wrapped still scrolls
+// horizontally instead of breaking the page layout on narrow screens.
+.table {
+  max-width: 100%;
+}
+
+// Topic content scrollable panel (used across all citizenship topic
+// sub-pages). Shrinks on phones so it doesn't force excessive page height.
+.topic-scroll-panel {
+  height: 520px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 767.98px) {
+  .topic-scroll-panel {
+    height: 60vh;
+  }
+}
+
+

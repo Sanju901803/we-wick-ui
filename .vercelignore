@@ -1,0 +1,20 @@
+# Vercel Ignore - Don't upload these to Vercel
+
+# Dependencies
+node_modules
+
+# Tests
+*.spec.ts
+e2e
+
+# Documentation
+*.md
+documentation
+
+# IDE
+.vscode
+.idea
+*.swp
+
+# Dist folder (built by Vercel)
+dist

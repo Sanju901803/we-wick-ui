@@ -1,0 +1,354 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">🧮</div>
+      <h1 class="display-6 fw-bold mb-2">Contractor to FullTime</h1>
+      <p class="lead text-muted">
+        Compare the true take-home value of an incorporated contractor (T4A) role versus a
+        full-time employee (T4) role in Canada — factoring in HST, corporate tax, dividends,
+        CPP, EI and personal income tax (2026, Ontario + Federal rates).
+      </p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <!-- INPUT FORM (top, full width) -->
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">📅 Work Schedule</h5>
+          <div class="row g-3 mb-3">
+            <div class="col-md-3 col-6">
+              <label class="form-label small text-muted">Furlough Days</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.furloughDays" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-3 col-6">
+              <label class="form-label small text-muted">Vacation Days</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.vacationDays" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-3 col-6 d-flex align-items-end">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="weekendDaysOffSwitch"
+                  [(ngModel)]="state.inputs.weekendDaysOff" (ngModelChange)="recalculate()">
+                <label class="form-check-label small text-muted" for="weekendDaysOffSwitch">Weekends Off</label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6" *ngIf="state.inputs.weekendDaysOff">
+              <label class="form-label small text-muted">Weekend Days / Week</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.weekendDaysCount" (ngModelChange)="recalculate()" min="0" max="7">
+            </div>
+          </div>
+
+          <!-- Impacting Results: shown right after the fields that affect them -->
+          <div class="alert alert-secondary py-2 px-3 mb-4">
+            <div class="d-flex justify-content-between small">
+              <span class="text-muted">Days we can bill</span>
+              <span class="fw-bold">{{ state.result.daysBillable }} days</span>
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-3">🧾 Billing</h5>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Hourly Rate ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.hourlyRate" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Billable Hours / Day</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.hoursPerDay" (ngModelChange)="recalculate()" min="0" step="0.5">
+            </div>
+          </div>
+
+          <!-- Impacting Result: hours billable + invoice breakdown (hours * rate + 13% HST) -->
+          <div class="alert alert-info mb-3">
+            <div class="d-flex justify-content-between small">
+              <span>Hours we can bill</span>
+              <span class="fw-bold">{{ state.result.hoursBillable }} hrs</span>
+            </div>
+            <div class="d-flex justify-content-between small">
+              <span>Actual Billed (hours × rate)</span>
+              <span class="fw-bold">{{ state.result.subtotalBilled | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="d-flex justify-content-between small">
+              <span>HST (13%)</span>
+              <span class="fw-bold">{{ state.result.hstBilled | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+            <hr class="my-2">
+            <div class="d-flex justify-content-between">
+              <span class="fw-bold">Total Received</span>
+              <span class="fw-bold fs-5">{{ state.result.totalBilled | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+          </div>
+
+          <!-- Payout cadence breakdown -->
+          <div class="row g-3 mb-4">
+            <div class="col-12">
+              <div class="small text-muted mb-2">If paid out on a regular schedule</div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Monthly</td>
+                      <td class="text-end">{{ state.result.payoutMonthly | currency:'CAD':'symbol':'1.0-0' }}</td>
+                      <td class="text-muted">Weekly</td>
+                      <td class="text-end">{{ state.result.payoutWeekly | currency:'CAD':'symbol':'1.0-0' }}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Biweekly</td>
+                      <td class="text-end">{{ state.result.payoutBiweekly | currency:'CAD':'symbol':'1.0-0' }}</td>
+                      <td class="text-muted">Daily</td>
+                      <td class="text-end">{{ state.result.payoutDaily | currency:'CAD':'symbol':'1.0-0' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-3">📈 Corporate Investments Income Earned</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Interest Income ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.interestIncome" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Realized Gains ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.realizedGains" (ngModelChange)="recalculate()" min="0">
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-3">🧮 Expenses</h5>
+          <div class="mb-2" *ngFor="let expense of state.inputs.expenses; let i = index">
+            <div class="row g-2 align-items-center">
+              <div class="col-7">
+                <input type="text" class="form-control form-control-sm" placeholder="Description"
+                  [(ngModel)]="expense.description" (ngModelChange)="recalculate()">
+              </div>
+              <div class="col-4">
+                <input type="number" class="form-control form-control-sm" placeholder="Amount ($)"
+                  [(ngModel)]="expense.amount" (ngModelChange)="recalculate()" min="0">
+              </div>
+              <div class="col-1 text-end">
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeExpense(i)" title="Remove expense">✕</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary mb-2" (click)="addExpense()">+ Add Expense</button>
+          <div class="d-flex justify-content-between small text-muted mb-4">
+            <span>Total Annual Expenses (pre-HST)</span>
+            <span class="fw-bold">{{ state.result.totalExpenses | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <h5 class="fw-bold mb-3">💰 Paying Yourself Options</h5>
+          <div class="row g-3 mb-2">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Salary ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.salaryDraw" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Dividend ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.annualDividendAmount" (ngModelChange)="recalculate()" min="0">
+            </div>
+          </div>
+          <div class="alert alert-secondary py-2 px-3 mb-0">
+            <div class="d-flex justify-content-between small">
+              <span class="text-muted">Salary net (after tax, CPP, EI)</span>
+              <span class="fw-bold">{{ state.result.salaryNet | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="d-flex justify-content-between small">
+              <span class="text-muted">Dividend net (after personal tax)</span>
+              <span class="fw-bold">{{ state.result.dividendNet | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2 pt-2 border-top mb-4">
+            <span class="fw-bold">Total Net as Contractor</span>
+            <span class="fw-bold fs-5 text-success">{{ state.result.combinedNet | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="calculateBreakdown()">
+              📊 Calculate Breakdown And Full Time Gross Needed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS: revealed side-by-side after the button is clicked -->
+  <div class="row g-4 justify-content-center mt-2" *ngIf="breakdownVisible">
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h6 class="fw-bold mb-3">🔍 Breakdown</h6>
+          <div class="table-responsive">
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr>
+                <td class="text-muted">Billable days × hours/day</td>
+                <td class="text-end">{{ state.result.daysBillable }} × {{ state.inputs.hoursPerDay }} = {{ state.result.hoursBillable }} hrs</td>
+              </tr>
+              <tr>
+                <td class="text-muted">Hourly rate</td>
+                <td class="text-end">{{ state.inputs.hourlyRate | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="fw-semibold text-success">
+                <td>Total billed (incl. HST)</td>
+                <td class="text-end">{{ state.result.totalBilled | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr>
+                <td class="text-muted small">On {{ state.result.totalBilled | currency:'CAD':'symbol':'1.0-0' }} &#64; 8.8% (Quick Method) − $300</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>− HST payable</td>
+                <td class="text-end">{{ state.result.hstPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr>
+                <td class="text-muted small">On {{ state.result.taxableAmount | currency:'CAD':'symbol':'1.0-0' }} taxable &#64; 12.2%</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>− Corporate tax payable</td>
+                <td class="text-end">{{ state.result.corporateTaxPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr>
+                <td class="text-muted small">On {{ state.result.totalInvestmentIncome | currency:'CAD':'symbol':'1.0-0' }} investment income (net of RDTOH refund)</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>− Investment tax payable</td>
+                <td class="text-end">{{ state.result.investmentTaxPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr class="fw-semibold text-success">
+                <td>Net retained in corporation</td>
+                <td class="text-end">{{ state.result.netInCorporation | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr class="border-top">
+                <td class="pt-3 fw-semibold">Where did expenses & dividends go?</td>
+                <td class="pt-3"></td>
+              </tr>
+              <tr class="text-success">
+                <td>+ Expenses reimbursed to you (tax-free)</td>
+                <td class="text-end">{{ state.result.nonTaxableReimbursement | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="text-success">
+                <td>+ Dividend paid to you</td>
+                <td class="text-end">{{ state.inputs.annualDividendAmount | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="text-success">
+                <td>+ RDTOH refund dividend paid to you</td>
+                <td class="text-end">{{ state.result.investmentDividendPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr>
+                <td class="text-muted small">On {{ state.result.taxablePersonalIncome | currency:'CAD':'symbol':'1.0-0' }} taxable dividend income</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>− Personal tax owed on dividends</td>
+                <td class="text-end">{{ state.result.personalTaxOwed | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="fw-semibold text-success">
+                <td>= Dividend & reimbursement net</td>
+                <td class="text-end">{{ state.result.personalNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr class="border-top">
+                <td class="pt-3 text-success">+ Salary drawn</td>
+                <td class="pt-3 text-end text-success">{{ state.inputs.salaryDraw | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr>
+                <td class="text-muted small">On {{ state.inputs.salaryDraw | currency:'CAD':'symbol':'1.0-0' }} salary drawn</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>− Salary tax + CPP + EI</td>
+                <td class="text-end">{{ (state.result.salaryTax + state.result.salaryCpp + state.result.salaryEi) | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="fw-semibold text-success">
+                <td>= Salary net</td>
+                <td class="text-end">{{ state.result.salaryNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+
+              <tr class="border-top">
+                <td class="pt-3 fw-bold text-success">
+                  Combined contractor net<br>
+                  <span class="small text-muted fw-normal">= Net retained in corp + Dividend &amp; reimbursement net + Salary net</span>
+                </td>
+                <td class="pt-3 text-end fs-5 fw-bold text-success align-top">{{ state.result.combinedNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <div class="alert alert-light border small mt-3 mb-0">
+            <strong>How the money flows, step by step:</strong>
+            <ol class="mb-0 ps-3 mt-1">
+              <li>You bill {{ state.result.daysBillable }} days × {{ state.inputs.hoursPerDay }} hrs at {{ state.inputs.hourlyRate | currency:'CAD':'symbol':'1.0-0' }}/hr, plus 13% HST, for a total of {{ state.result.totalBilled | currency:'CAD':'symbol':'1.0-0' }} into the corporation.</li>
+              <li>The corporation remits HST ({{ state.result.hstPayable | currency:'CAD':'symbol':'1.0-0' }}) and pays corporate tax ({{ state.result.corporateTaxPayable | currency:'CAD':'symbol':'1.0-0' }}) on income after expenses.</li>
+              <li>Any investment income earned inside the corp is taxed too, net of the RDTOH refund mechanism ({{ state.result.investmentTaxPayable | currency:'CAD':'symbol':'1.0-0' }}), leaving {{ state.result.netInCorporation | currency:'CAD':'symbol':'1.0-0' }} retained in the corp for future use.</li>
+              <li>Your expenses ({{ state.result.nonTaxableReimbursement | currency:'CAD':'symbol':'1.0-0' }}) are reimbursed back to you tax-free.</li>
+              <li>Dividends ({{ state.inputs.annualDividendAmount | currency:'CAD':'symbol':'1.0-0' }} draw + {{ state.result.investmentDividendPayable | currency:'CAD':'symbol':'1.0-0' }} RDTOH refund) are paid to you personally and taxed at dividend rates ({{ state.result.personalTaxOwed | currency:'CAD':'symbol':'1.0-0' }} tax owed).</li>
+              <li>Any salary drawn ({{ state.inputs.salaryDraw | currency:'CAD':'symbol':'1.0-0' }}) is taxed as regular employment income plus CPP/EI.</li>
+              <li>What's left in your pocket (dividend/reimbursement net + salary net) plus what's still sitting in the corporation adds up to your combined contractor net of {{ state.result.combinedNet | currency:'CAD':'symbol':'1.0-0' }}.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h6 class="fw-bold mb-3">👔 Full-Time Gross Needed to Match Contractor Net</h6>
+          <p class="small text-muted">Working backwards from the contractor's combined net: Net + Tax + CPP + EI = Gross salary.</p>
+          <div class="table-responsive">
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr class="fw-semibold text-success">
+                <td>Net (target = contractor combined net)</td>
+                <td class="text-end">{{ state.result.combinedNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr>
+                <td class="text-muted small">On {{ state.result.requiredSalaryForContractorNet | currency:'CAD':'symbol':'1.0-0' }} gross</td>
+                <td></td>
+              </tr>
+              <tr class="text-danger">
+                <td>+ Income Tax</td>
+                <td class="text-end">{{ state.result.requiredSalaryTax | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="text-danger">
+                <td>+ CPP</td>
+                <td class="text-end">{{ state.result.requiredSalaryCpp | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="text-danger">
+                <td>+ EI</td>
+                <td class="text-end">{{ state.result.requiredSalaryEi | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+              <tr class="fw-bold text-primary">
+                <td>= Required Gross Salary</td>
+                <td class="text-end fs-5">{{ state.result.requiredSalaryForContractorNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ Estimates only, based on 2026 Ontario + Federal tax rates — not financial, tax, or legal
+        advice. Assumes salary/dividend income is high enough to hit the CPP/EI maximum
+        contribution caps. Consult a professional accountant before making career decisions.
+      </div>
+    </div>
+  </div>
+</div>

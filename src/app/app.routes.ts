@@ -13,8 +13,8 @@ export const routes: Routes = [
   },
   {
     path: 'contractor',
-    loadComponent: () =>
-      import('./features/contractor/contractor.component').then(m => m.ContractorComponent)
+    loadChildren: () =>
+      import('./features/contractor/contractor.routes').then(m => m.contractorRoutes)
   },
   {
     path: 'dividend-calculator',

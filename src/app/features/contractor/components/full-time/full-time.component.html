@@ -1,0 +1,265 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">👔</div>
+      <h1 class="display-6 fw-bold mb-2">Fulltime to Contractor</h1>
+      <p class="lead text-muted">
+        See exactly what gets deducted from a full-time (T4) gross salary — income tax, CPP, and
+        EI — and what actually lands in your bank account.
+      </p>
+    </div>
+  </div>
+
+  <!-- GROSS SALARY + NET PAYSLIP: one combined section -->
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">💼 Gross → Net Payslip</h5>
+
+          <label class="form-label small text-muted">Annual Gross Salary ($)</label>
+          <input type="number" class="form-control" [(ngModel)]="state.inputs.fullTimeGrossSalary" (ngModelChange)="onGrossSalaryChange()" min="0">
+          <div class="form-text mt-2">
+            CPP and EI are modelled at their 2026 annual maximums (CPP {{ cppMax | currency:'CAD':'symbol':'1.0-2' }},
+            EI {{ eiMax | currency:'CAD':'symbol':'1.0-2' }}) — assumes salary is high enough to hit both caps.
+          </div>
+
+          <hr class="my-4">
+
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <tbody>
+                <tr>
+                  <td class="text-danger">− Income Tax (Federal + Ontario)</td>
+                  <td class="text-end text-danger">{{ state.result.employeeTax | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-danger">− CPP Contribution</td>
+                  <td class="text-end text-danger">{{ state.result.employeeCpp | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-danger">− EI Premium</td>
+                  <td class="text-end text-danger">{{ state.result.employeeEi | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="table-success fw-bold fs-5">
+                  <td>Final Take-Home Pay</td>
+                  <td class="text-end">{{ state.result.employeeNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary btn-lg" (click)="calculateBreakdown()">
+              📊 Calculate Contractor Equivalent
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRACTOR EQUIVALENT: revealed once calculated, hidden again if Gross Salary changes -->
+  <div class="row g-4 justify-content-center mt-4" *ngIf="breakdownVisible">
+    <!-- LEFT: all editable contractor assumption fields -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-1">🧮 Contractor Assumptions</h5>
+          <p class="small text-muted mb-3">
+            Editing any field here recalculates the Equivalent Contractor Hourly Rate on the right.
+          </p>
+
+          <h6 class="fw-bold mb-3">📅 Work Schedule</h6>
+          <div class="row g-3 mb-3">
+            <div class="col-md-3 col-6">
+              <label class="form-label small text-muted">Furlough Days</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.furloughDays" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-3 col-6">
+              <label class="form-label small text-muted">Vacation Days</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.vacationDays" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-3 col-6 d-flex align-items-end">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="ftWeekendDaysOffSwitch"
+                  [(ngModel)]="state.inputs.weekendDaysOff" (ngModelChange)="recalculate()">
+                <label class="form-check-label small text-muted" for="ftWeekendDaysOffSwitch">Weekends Off</label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6" *ngIf="state.inputs.weekendDaysOff">
+              <label class="form-label small text-muted">Weekend Days / Week</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.weekendDaysCount" (ngModelChange)="recalculate()" min="0" max="7">
+            </div>
+          </div>
+
+          <div class="alert alert-secondary py-2 px-3 mb-4">
+            <div class="d-flex justify-content-between small">
+              <span class="text-muted">Days we can bill</span>
+              <span class="fw-bold">{{ state.result.daysBillable }} days</span>
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-3">🧾 Billing</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Billable Hours / Day</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.hoursPerDay" (ngModelChange)="recalculate()" min="0" step="0.5">
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+              <div class="small text-muted">Hours we can bill: <span class="fw-bold">{{ state.result.hoursBillable }} hrs/year</span></div>
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-3">📈 Corporate Investments Income Earned</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Interest Income ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.interestIncome" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Realized Gains ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.realizedGains" (ngModelChange)="recalculate()" min="0">
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-3">🧮 Expenses</h6>
+          <div class="mb-2" *ngFor="let expense of state.inputs.expenses; let i = index">
+            <div class="row g-2 align-items-center">
+              <div class="col-7">
+                <input type="text" class="form-control form-control-sm" placeholder="Description"
+                  [(ngModel)]="expense.description" (ngModelChange)="recalculate()">
+              </div>
+              <div class="col-4">
+                <input type="number" class="form-control form-control-sm" placeholder="Amount ($)"
+                  [(ngModel)]="expense.amount" (ngModelChange)="recalculate()" min="0">
+              </div>
+              <div class="col-1 text-end">
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeExpense(i)" title="Remove expense">✕</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary mb-2" (click)="addExpense()">+ Add Expense</button>
+          <div class="d-flex justify-content-between small text-muted mb-4">
+            <span>Total Annual Expenses (pre-HST)</span>
+            <span class="fw-bold">{{ state.result.totalExpenses | currency:'CAD':'symbol':'1.0-0' }}</span>
+          </div>
+
+          <h6 class="fw-bold mb-3">💰 Paying Yourself Options</h6>
+          <div class="row g-3 mb-2">
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Salary ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.salaryDraw" (ngModelChange)="recalculate()" min="0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small text-muted">Dividend ($)</label>
+              <input type="number" class="form-control" [(ngModel)]="state.inputs.annualDividendAmount" (ngModelChange)="recalculate()" min="0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: equivalent hourly rate + breakdown -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <div class="text-muted small text-uppercase fw-bold mb-1">Equivalent Contractor Hourly Rate</div>
+            <div class="h2 fw-bold text-primary">
+              {{ state.result.requiredHourlyRateForEmployeeNet | currency:'CAD':'symbol':'1.2-2' }}/hr
+            </div>
+            <input type="text" class="form-control text-center fw-bold mt-2" disabled readonly
+              [value]="state.result.requiredHourlyRateForEmployeeNet | currency:'CAD':'symbol':'1.2-2'">
+            <div class="small text-muted mt-2">
+              Charging this rate at {{ state.inputs.hoursPerDay }} billable hrs/day nets the same
+              {{ state.result.employeeNet | currency:'CAD':'symbol':'1.0-0' }} take-home as the
+              Full-Time gross salary above. Solved automatically — not editable.
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-3">🔍 Breakdown at the Solved Rate</h6>
+          <div class="table-responsive">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <td class="text-muted">Billable days × hours/day</td>
+                  <td class="text-end">{{ state.result.daysBillable }} × {{ state.inputs.hoursPerDay }} = {{ state.result.hoursBillable }} hrs</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">Solved hourly rate</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateForEmployeeNet | currency:'CAD':'symbol':'1.2-2' }}</td>
+                </tr>
+                <tr class="fw-semibold text-success">
+                  <td>Total billed (incl. HST)</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateTotalBilled | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="text-danger">
+                  <td>− HST payable</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateHstPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="text-danger">
+                  <td>− Corporate tax payable</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateCorporateTaxPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="text-success">
+                  <td>+ Salary drawn</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateSalaryDraw | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="text-danger">
+                  <td>− Salary tax + CPP + EI</td>
+                  <td class="text-end">
+                    {{ (state.result.requiredHourlyRateSalaryTax + state.result.requiredHourlyRateSalaryCpp + state.result.requiredHourlyRateSalaryEi) | currency:'CAD':'symbol':'1.0-0' }}
+                  </td>
+                </tr>
+                <tr class="fw-semibold text-success">
+                  <td>= Salary net</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRateSalaryNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+
+                <tr class="border-top">
+                  <td class="pt-3 text-muted small">Expenses reimbursed to you (tax-free)</td>
+                  <td class="pt-3 text-end text-success">+{{ state.result.requiredHourlyRateNonTaxableReimbursement | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr *ngIf="state.result.requiredHourlyRateDividendAmount > 0">
+                  <td class="text-muted small">Dividend drawn (taxable at dividend rates)</td>
+                  <td class="text-end text-success">+{{ state.result.requiredHourlyRateDividendAmount | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted small">− Personal tax owed on {{ state.result.requiredHourlyRateTaxablePersonalIncome | currency:'CAD':'symbol':'1.0-0' }} taxable dividend income</td>
+                  <td class="text-end text-danger">−{{ state.result.requiredHourlyRatePersonalTaxOwed | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="fw-semibold text-success">
+                  <td>= Dividend & reimbursement net</td>
+                  <td class="text-end">{{ state.result.requiredHourlyRatePersonalNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+
+                <tr class="border-top">
+                  <td class="pt-3 text-muted small">Net retained in corporation (investment income, net of tax)</td>
+                  <td class="pt-3 text-end">{{ state.result.requiredHourlyRateNetInCorporation | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+
+                <tr class="border-top fw-bold text-success">
+                  <td class="pt-3">
+                    = Combined contractor net<br>
+                    <span class="small text-muted fw-normal">Salary net + Dividend &amp; reimbursement net + Net retained in corp</span>
+                  </td>
+                  <td class="pt-3 text-end fs-5 align-top">{{ state.result.requiredHourlyRateCombinedNet | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ Estimates only, based on 2026 Ontario + Federal tax rates — not financial, tax, or legal
+        advice.
+      </div>
+    </div>
+  </div>
+</div>

@@ -116,17 +116,18 @@ export class HomeComponent {
     },
     {
       title: 'Contractor vs Full-Timer',
-      description: 'Compare the true take-home value of a contractor (T4A) role vs a permanent employee (T4) role in Canada.',
+      description: 'Compare the true take-home value of a contractor (T4A) role vs a permanent employee (T4) role in Canada — plus payout, investment and tax reduction strategies for both.',
       icon: '💼',
       route: '/contractor',
-      status: 'coming-soon',
+      status: 'live',
+      gated: false,
       color: '#c8832a',
       highlights: [
-        'Province-based tax calculation',
-        'Benefits & RRSP value estimator',
-        'CPP & EI impact comparison',
-        'Break-even rate calculator',
-        'Side-by-side net income chart'
+        'Contractor ↔ Full-Time net pay comparison',
+        'Corporate taxes & deductible expenses',
+        'Personal taxes & deductions (T4)',
+        'Payout & investment strategy for corporations',
+        'RRSP/TFSA tax reduction strategy for employees'
       ]
     },
     {

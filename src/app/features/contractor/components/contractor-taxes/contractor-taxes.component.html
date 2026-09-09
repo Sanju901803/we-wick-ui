@@ -1,0 +1,127 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">🧾</div>
+      <h1 class="display-6 fw-bold mb-2">Contractor Taxes & Expenses</h1>
+      <p class="lead text-muted">
+        The taxes that apply to an incorporated contractor, and the expense categories that can
+        reduce taxable corporate income.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <!-- TAXES THAT APPLY -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">💰 Taxes That Apply</h5>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td>HST Collected on Billing</td>
+                  <td class="text-end">{{ hstRate | percent:'1.0-2' }}</td>
+                </tr>
+                <tr>
+                  <td>HST Payable (Quick Method)</td>
+                  <td class="text-end">{{ hstQuickMethodRate | percent:'1.0-2' }} minus ${{ hstQuickMethodCredit }} credit</td>
+                </tr>
+                <tr>
+                  <td>Corporate Tax Rate (small business)</td>
+                  <td class="text-end">{{ corporateTaxRate | percent:'1.0-2' }}</td>
+                </tr>
+                <tr>
+                  <td>Capital Gains Tax — Total</td>
+                  <td class="text-end">{{ capitalGainsTaxTotalRate | percent:'1.0-2' }}</td>
+                </tr>
+                <tr>
+                  <td>Capital Gains Tax — Non-Refundable Portion</td>
+                  <td class="text-end">{{ capitalGainsTaxNonRefundableRate | percent:'1.0-2' }}</td>
+                </tr>
+                <tr>
+                  <td>RDTOH Dividend Refund Rate</td>
+                  <td class="text-end">{{ rdtohRefundRate | percent:'1.0-2' }} per $1 of dividend paid</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h6 class="fw-bold mt-4 mb-2">Your Current Scenario</h6>
+          <div class="table-responsive">
+            <table class="table table-sm mb-0">
+              <tbody>
+                <tr>
+                  <td class="text-muted">Total Billed (incl. HST)</td>
+                  <td class="text-end">{{ state.result.totalBilled | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">HST Payable</td>
+                  <td class="text-end">{{ state.result.hstPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">Corporate Tax Payable</td>
+                  <td class="text-end">{{ state.result.corporateTaxPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr>
+                  <td class="text-muted">Investment Tax Payable (after refund)</td>
+                  <td class="text-end">{{ state.result.investmentTaxPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+                <tr class="fw-bold">
+                  <td>Total Corp Tax + HST Payable</td>
+                  <td class="text-end">{{ state.result.totalCorpPayable | currency:'CAD':'symbol':'1.0-0' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPENSES -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">🧮 Your Expenses</h5>
+          <div class="mb-4">
+            <div class="table-responsive" *ngIf="state.inputs.expenses.length">
+              <table class="table table-sm mb-2">
+                <tbody>
+                  <tr *ngFor="let expense of state.inputs.expenses">
+                    <td class="text-muted">{{ expense.description || '(untitled expense)' }}</td>
+                    <td class="text-end">{{ expense.amount | currency:'CAD':'symbol':'1.0-0' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between fw-bold">
+              <span>Total Annual Expenses (pre-HST)</span>
+              <span>{{ state.result.totalExpenses | currency:'CAD':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="form-text">
+              Reimbursed tax-free from the corporation: {{ state.result.nonTaxableReimbursement | currency:'CAD':'symbol':'1.0-0' }}.
+              Edit line items on the "Contractor to FullTime" tab.
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-3">📋 Common Expense Categories</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0" *ngFor="let category of expenseCategories">
+              <div class="fw-semibold">{{ category.name }}</div>
+              <div class="small text-muted">{{ category.description }}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-12">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ Reference rates for the 2026 tax year (Ontario + Federal). Expense eligibility depends on
+        individual circumstances — consult a professional accountant.
+      </div>
+    </div>
+  </div>
+</div>

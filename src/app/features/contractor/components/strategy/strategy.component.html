@@ -1,0 +1,115 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10 text-center">
+      <div class="mb-3 tool-hero-icon">💡</div>
+      <h1 class="display-6 fw-bold mb-2">Payout, Investment & Tax Reduction Strategy for Corporate</h1>
+      <p class="lead text-muted">
+        The best way to distribute the money your corporation earns for your current scenario —
+        built from the numbers you entered on the "Contractor to FullTime" tab.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0 h-100 text-center">
+        <div class="card-body p-4">
+          <div class="text-muted small text-uppercase fw-bold mb-1">💵 Personal Money to Spend Today</div>
+          <div class="display-6 fw-bold text-success">{{ personalMoneyToSpend | currency:'CAD':'symbol':'1.0-0' }}</div>
+          <div class="small text-muted">Salary net + dividend net + expense reimbursement — money already in your personal bank account after tax.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0 h-100 text-center">
+        <div class="card-body p-4">
+          <div class="text-muted small text-uppercase fw-bold mb-1">🏦 Retained in Corp for Investment</div>
+          <div class="display-6 fw-bold text-primary">{{ retainedForInvestment | currency:'CAD':'symbol':'1.0-0' }}</div>
+          <div class="small text-muted">Money left inside the corporation after all taxes and payouts — available to invest or pay out later.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-1">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">👔 Ideal Payout Strategy (Salary vs Dividend)</h5>
+          <ul class="mb-0">
+            <li class="mb-2">
+              <strong>Pay a modest salary first.</strong> A salary creates RRSP contribution room (18% of prior-year
+              salary) and CPP pensionable earnings — dividends create neither. Many owner-operators pay themselves a
+              salary around the CPP/EI thresholds or enough to maximize RRSP room, then top up with dividends.
+            </li>
+            <li class="mb-2">
+              <strong>Use dividends for the remainder.</strong> Dividends avoid CPP/EI premiums entirely and are taxed
+              at preferential personal rates (dividend tax credit), but every dollar is taxed personally in the year
+              it's paid — there's no ability to "smooth" income across years the way retained earnings can.
+            </li>
+            <li class="mb-2">
+              <strong>Don't pay out more than you need to spend.</strong> Any dividend/salary drawn now that you don't
+              spend immediately gives up the tax-deferral advantage of leaving it in the corporation (see below).
+              Keeping money corporate and only drawing what covers your personal budget is usually more tax-efficient.
+            </li>
+            <li class="mb-0">
+              <strong>Watch the passive income threshold.</strong> If the corporation's investment income exceeds
+              $50,000/year, the small business tax rate deduction starts to shrink — this can push more corporate
+              income into the higher general tax rate.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center mt-1">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3">📈 Ideal Investment Strategy</h5>
+          <ul class="mb-0">
+            <li class="mb-2">
+              <strong>Invest inside the corporation for tax deferral.</strong> Corporate tax rates on active business
+              income (~12.2% small business rate) are much lower than personal rates, so leaving money in the
+              corporation to invest lets more capital compound before it's eventually taxed on withdrawal.
+            </li>
+            <li class="mb-2">
+              <strong>Capital gains and RDTOH refunds soften investment tax.</strong> As modeled on the Contractor
+              to FullTime tab, investment income triggers refundable tax (RDTOH) that comes back to you once a taxable
+              dividend is paid — so the effective corporate tax rate on investment income is lower than it first appears.
+            </li>
+            <li class="mb-2">
+              <strong>Maximize personal registered accounts first.</strong> TFSA and RRSP room (the latter built from
+              salary income) shelter growth from tax entirely or defer it — usually preferable to corporate investing
+              for the same dollar, when you have room available.
+            </li>
+            <li class="mb-0">
+              <strong>Consider a holding company for larger portfolios.</strong> As retained earnings grow, a separate
+              holdco can isolate investment assets from business liability and simplify succession/estate planning.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-lg-10">
+      <div class="alert alert-info small mb-0">
+        🚧 <strong>Future enhancement:</strong> Modeling income splitting with a spouse and/or hiring an employee
+        (additional T4/T4A recipients, prescribed-rate loans, and payroll considerations) is planned for a future
+        version of this tool.
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-lg-10">
+      <div class="alert alert-warning small mb-0">
+        ⚠️ General educational guidance only, based on 2026 Ontario + Federal tax rules — not financial, tax, or
+        legal advice. Consult a professional accountant or financial planner before making decisions.
+      </div>
+    </div>
+  </div>
+</div>

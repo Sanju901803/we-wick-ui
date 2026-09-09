@@ -1,0 +1,36 @@
+<!-- Sub-navigation for the "Fulltime" main tab: left sidebar nav (vertical,
+     wrapping labels) on desktop, horizontal scrollable strip with scroll
+     arrows on mobile/tablet — matches the Citizenship Topics browser layout. -->
+<div class="container px-2 px-md-3">
+  <div class="d-flex flex-column flex-md-row" style="min-height: calc(100vh - 180px)">
+    <nav class="topic-sidebar border-end border-bottom border-md-bottom-0 bg-white position-relative">
+      <button type="button" class="topic-nav-arrow topic-nav-arrow-left d-md-none" aria-label="Scroll to previous pages" (click)="scrollNav(-1)">‹</button>
+
+      <div #navList class="list-group list-group-flush topic-nav-list d-flex flex-row flex-md-column">
+        <a routerLink="/contractor/fulltime/to-contractor" routerLinkActive="active ww-sidebar-active text-white"
+          class="list-group-item list-group-item-action topic-nav-item d-flex flex-column flex-md-row align-items-center text-center text-md-start gap-1 gap-md-2 py-2 px-3 border-0 flex-shrink-0">
+          <div style="font-size: 20px;">👔</div>
+          <span class="fw-semibold" style="font-size:0.85rem">Fulltime to Contractor</span>
+        </a>
+        <a routerLink="/contractor/fulltime/personal-taxes" routerLinkActive="active ww-sidebar-active text-white"
+          class="list-group-item list-group-item-action topic-nav-item d-flex flex-column flex-md-row align-items-center text-center text-md-start gap-1 gap-md-2 py-2 px-3 border-0 flex-shrink-0">
+          <div style="font-size: 20px;">🧾</div>
+          <span class="fw-semibold" style="font-size:0.85rem">Fulltime Personal Taxes & Expenses</span>
+        </a>
+        <a routerLink="/contractor/fulltime/investment-strategy" routerLinkActive="active ww-sidebar-active text-white"
+          class="list-group-item list-group-item-action topic-nav-item d-flex flex-column flex-md-row align-items-center text-center text-md-start gap-1 gap-md-2 py-2 px-3 border-0 flex-shrink-0">
+          <div style="font-size: 20px;">📈</div>
+          <span class="fw-semibold" style="font-size:0.85rem">Investment & Tax Reduction Strategy</span>
+        </a>
+      </div>
+
+      <button type="button" class="topic-nav-arrow topic-nav-arrow-right d-md-none" aria-label="Scroll to next pages" (click)="scrollNav(1)">›</button>
+    </nav>
+
+    <!-- Right content panel -->
+    <main class="flex-fill p-3 p-md-4 overflow-auto bg-light">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
